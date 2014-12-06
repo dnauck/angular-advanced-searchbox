@@ -28,6 +28,16 @@ module.exports = function(grunt) {
         dest: 'build/<%= pkg.name %>.min.css'
       }
     },
+    copy: {
+      template : {
+        files: [
+          {
+            src: ['src/angular-advanced-searchbox.html'], 
+            dest: 'build/angular-advanced-searchbox.html'
+          }
+        ]
+      }
+    },
     jshint: {
       all: [
         './src/*.js', '*.json'
@@ -42,8 +52,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint:all', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['jshint:all', 'uglify', 'cssmin', 'copy']);
 
 };
