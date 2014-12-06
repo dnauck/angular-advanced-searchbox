@@ -20,12 +20,14 @@
     <link rel="stylesheet" href="angular-advanced-searchbox.min.css">
 
 
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+    <script src="https://rawgit.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-0.12.0.min.js"></script>
     <script src="angular-advanced-searchbox.min.js"></script>
 
 
     <script type="text/javascript">
-      var app = angular.module('app', ['angular-advanced-searchbox']);
+      var app = angular.module('app', ['ui.bootstrap', 'angular-advanced-searchbox']);
       
 
       app.controller('DemoController', function($scope) {
