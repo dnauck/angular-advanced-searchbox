@@ -1,0 +1,6 @@
+{
+  "globals": {
+    "angular": true,
+    "document": true
+  }
+}

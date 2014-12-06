@@ -1,0 +1,37 @@
+{
+  "name": "angular-advanced-searchbox",
+  "version": "1.0.0",
+  "description": "A directive for AngularJS providing a advanced visual search box",
+  "main": "Gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dnauck/angular-advanced-searchbox"
+  },
+  "keywords": [
+    "search",
+    "angular",
+    "bootstrap"
+  ],
+  "author": {
+    "name": "Nauck IT KG",
+    "url": "http://www.nauck-it.de/"
+  },
+  "contributors": [
+    {
+      "name": "Daniel Nauck",
+      "email": "d.nauck@nauck-it.de",
+      "url": "http://www.nauck-it.de/"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dnauck/angular-advanced-searchbox/issues"
+  },
+  "homepage": "https://github.com/dnauck/angular-advanced-searchbox",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-uglify": "^0.6.0"
+  }
+}
