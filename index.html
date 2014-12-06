@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html ng-app="app" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A directive for AngularJS providing a advanced visual search box">
+    <meta name="author" content="Daniel Nauck">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Angular Advanced Searchbox</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="angular-advanced-searchbox.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+    <script src="angular-advanced-searchbox.min.js"></script>
+
+
+    <script type="text/javascript">
+      var app = angular.module('app', ['angular-advanced-searchbox']);
+      
+
+      app.controller('DemoController', function($scope) {
+        $scope.availableSearchParams = [
+          { key: "name", name: "Name", placeholder: "Name..." },
+          { key: "city", name: "City", placeholder: "City..." },
+          { key: "country", name: "Country", placeholder: "Country..." },
+          { key: "emailAddress", name: "E-Mail", placeholder: "E-Mail..." },
+          { key: "job", name: "Job", placeholder: "Job..." }
+        ];
+      });
+    </script>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Angular Advanced Searchbox</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <div class="container" ng-controller="DemoController">
+      <div class="jumbotron">
+      
+        <h1>Angular Advanced Searchbox</h1>
+        <p>A directive for AngularJS providing a advanced visual search box.</p>
+        <p>
+          <a class="btn btn-primary btn-lg" href="https://github.com/dnauck/angular-advanced-searchbox/archive/master.zip" role="button"><span class="fa fa-download"></span> Download</a>
+          <a class="btn btn-default btn-lg" href="https://github.com/dnauck/angular-advanced-searchbox" role="button"><span class="fa fa-github"></span> Github</a>
+        </p>
+      
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h2>Demo</h2>
+          <p>Click on a suggested search parameter or use autocompletion feature and press 'Enter' to add new search parameter to yout query:</p>
+          <nit-advanced-searchbox ng-model="searchParams" parameters="availableSearchParams" placeholder="Search..."></nit-advanced-searchbox>
+          <p>
+            <strong>Output:</strong>
+            <pre><code>{{searchParams}}</code></pre>
+            The output model could be directly used as params object for Angular's $http API.
+          </p>
+        </div>
+        <div class="col-sm-12">
+          <h2>Getting started</h2>
+          <p>Add the following AngularJS directive to your HTML:</p>
+          <p>
+            <pre><code>&#60;nit-advanced-searchbox ng-model="searchParams" parameters="availableSearchParams" placeholder="Search..."&#62;&#60;/nit-advanced-searchbox&#62;</code></pre>
+          </p>
+          <p><a class="btn btn-default" href="https://github.com/dnauck/angular-advanced-searchbox/blob/master/README.md" role="button">View Readme &raquo;</a></p>
+       </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Nauck IT KG 2014</p>
+      </footer>
+    </div> <!-- /container -->
+  </body>
+</html>
