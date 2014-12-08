@@ -1,0 +1,23 @@
+{
+  "name": "angular-advanced-searchbox",
+  "version": "1.0.0",
+  "homepage": "https://github.com/dnauck/angular-advanced-searchbox",
+  "authors": [
+    "Daniel Nauck <d.nauck@nauck-it.de>"
+  ],
+  "description": "A directive for AngularJS providing a advanced visual search box",
+  "main": "src/angular-advanced-searchbox.js",
+  "keywords": [
+    "search",
+    "angular",
+    "bootstrap"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
