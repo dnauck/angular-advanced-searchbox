@@ -2,7 +2,7 @@
   "name": "angular-advanced-searchbox",
   "version": "1.0.0",
   "description": "A directive for AngularJS providing a advanced visual search box",
-  "main": "Gruntfile.js",
+  "main": "src/angular-advanced-searchbox.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/dnauck/angular-advanced-searchbox"
