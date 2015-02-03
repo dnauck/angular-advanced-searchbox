@@ -31,7 +31,8 @@ module.exports = function(grunt) {
         }
       },
       template: {
-        src: ['src/*.html'],
+        cwd: 'src/',
+        src: ['*.html'],
         dest: 'tmp/templates.js'
       },
     },
