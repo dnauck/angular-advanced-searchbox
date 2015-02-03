@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/dnauck/angular-advanced-searchbox",
   "devDependencies": {
+    "bower": "^1.3.12",
     "grunt": "^0.4.5",
     "grunt-angular-templates": "^0.5.7",
     "grunt-bump": "^0.1.0",
