@@ -22,5 +22,11 @@
     "package.json",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+        "angular": "latest",
+        "jquery": "~2.1",
+        "bootstrap": "~3.3",
+        "angular-bootstrap": "~0.12"
+    }
 }
