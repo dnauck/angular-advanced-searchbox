@@ -6,7 +6,10 @@
     "Daniel Nauck <d.nauck@nauck-it.de>"
   ],
   "description": "A directive for AngularJS providing a advanced visual search box",
-  "main": "src/angular-advanced-searchbox.js",
+  "main": [
+    "dist/angular-advanced-searchbox.min.css",
+    "dist/angular-advanced-searchbox-tpls.js"
+  ],
   "keywords": [
     "search",
     "angular",
