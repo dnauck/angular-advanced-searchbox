@@ -112,6 +112,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-angular-templates');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'jshint:all', 'ngtemplates', 'concat', 'copy', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['build']);
+  grunt.registerTask('build', ['clean', 'jshint:all', 'ngtemplates', 'concat', 'copy', 'uglify', 'cssmin']);
+  grunt.registerTask('makeRelease', ['bump-only', 'build', 'bump-commit']);
 
 };
