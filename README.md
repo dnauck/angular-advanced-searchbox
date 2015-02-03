@@ -13,11 +13,20 @@ Include with bower
 bower install angular-advanced-searchbox
 ```
 
+The bower package contains files in the ```dist/```directory with the following names:
+
+- angular-advanced-searchbox.js
+- angular-advanced-searchbox.min.js
+- angular-advanced-searchbox-tpls.js
+- angular-advanced-searchbox-tpls.min.js
+
+Files with the ```min``` suffix are minified versions to be used in production. The files with ```-tpls``` in their name have the directive template bundled. If you don't need the default template use the ```angular-paginate-anything.min.js``` file and provide your own template with the ```templateUrl``` attribute.
+
 Load the javascript and css and declare your Angular dependency
 
 ```html
-<link rel="stylesheet" href="angular-advanced-searchbox.min.css">
-<script src="angular-advanced-searchbox.min.js"></script>
+<link rel="stylesheet" href="bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox.min.css">
+<script src="bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox-tpls.min.js"></script>
 ```
 
 ```js
