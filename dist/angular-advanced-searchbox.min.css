@@ -1,5 +1,5 @@
 /*! 
- * angular-advanced-searchbox v1.1.0
+ * angular-advanced-searchbox v1.1.1
  * https://github.com/dnauck/angular-advanced-searchbox
  * Copyright (c) 2015 Nauck IT KG http://www.nauck-it.de/
  * License: MIT
