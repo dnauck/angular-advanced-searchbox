@@ -17,7 +17,7 @@
                        nit-set-focus="searchParam.editMode"
                        ng-keydown="keydown($event, $index)"
                        ng-blur="leaveEditMode($index)"
-                       ng-show="searchParam.editMode"
+                       ng-if="searchParam.editMode"
                        ng-change="searchParamValueChanged(searchParam)"
                        ng-model="searchParam.value"
                        placeholder="{{searchParam.placeholder}}" />
