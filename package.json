@@ -2,7 +2,7 @@
   "name": "angular-advanced-searchbox",
   "version": "1.1.1",
   "description": "A directive for AngularJS providing a advanced visual search box",
-  "main": "src/angular-advanced-searchbox.js",
+  "main": "dist/angular-advanced-searchbox-tpls.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/dnauck/angular-advanced-searchbox"
