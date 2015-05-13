@@ -10,7 +10,7 @@
             </a>
             <div class="key">{{searchParam.name}}:</div>
             <div class="value">
-                <span ng-show="!searchParam.editMode" ng-click="enterEditMode($index)">{{searchParam.value}}</span>
+                <span ng-if="!searchParam.editMode" ng-click="enterEditMode($index)">{{searchParam.value}}</span>
                 <input name="value"
                        type="text"
                        nit-auto-size-input
