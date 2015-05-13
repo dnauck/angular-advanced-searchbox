@@ -93,9 +93,16 @@ angular.module('angular-advanced-searchbox', [])
                         updateModel('delete', 'query');
                     };
 
+                    $scope.isUnsedParameter = function (value, index) {
+                        return $filter('filter')($scope.searchParams, function (param) { return param.key === value.key; }).length === 0;
+                    };
+
                     $scope.addSearchParam = function (searchParam, value, enterEditModel) {
                         if (enterEditModel === undefined)
                             enterEditModel = true;
+
+                        if (!$scope.isUnsedParameter(searchParam))
+                            return;
 
                         $scope.searchParams.push(
                             {
@@ -107,8 +114,6 @@ angular.module('angular-advanced-searchbox', [])
                             }
                         );
 
-                        //TODO: hide used suggestion
-
                         updateModel('add', searchParam.key, value);
                     };
 
@@ -119,8 +124,6 @@ angular.module('angular-advanced-searchbox', [])
                         var searchParam = $scope.searchParams[index];
                         $scope.searchParams.splice(index, 1);
 
-                        //TODO: show hidden/removed suggestion
-
                         updateModel('delete', searchParam.key);
                     };
 
@@ -128,8 +131,6 @@ angular.module('angular-advanced-searchbox', [])
                         $scope.searchParams.length = 0;
                         $scope.searchQuery = '';
                         
-                        //TODO: show hidden/removed suggestion
-
                         $scope.model = {};
                     };
 
