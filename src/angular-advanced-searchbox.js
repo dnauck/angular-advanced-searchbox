@@ -51,6 +51,12 @@ angular.module('angular-advanced-searchbox', [])
                                 }
                             }
                         });
+
+                        // delete not existing search parameters from internal state array
+                        angular.forEach($scope.searchParams, function (value, key){
+                            if (!$scope.model.hasOwnProperty(value.key))
+                                updateModel('delete', value.key);
+                        });
                     }, true);
 
                     $scope.searchParamValueChanged = function (param) {

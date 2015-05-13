@@ -1,5 +1,5 @@
 ### 2.0.0 - unreleased
-* Support to add search parameters and change search parameter's values via ng-model, fixed issue #7
+* Support to add, delete search parameters and change search parameter's values via ng-model, fixed issue #7 and #9
 * change main proeprty of package.json to final build in dist folder, fixes #4
 * use ng-if for search parameter input to avoid rendering issues and performance
 
