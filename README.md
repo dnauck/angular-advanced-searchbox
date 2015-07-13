@@ -33,6 +33,18 @@ Load the javascript and css and declare your Angular dependency
 angular.module('myModule', ['angular-advanced-searchbox']);
 ```
 
+Define the available search parameters in your controller:
+
+```js
+$scope.availableSearchParams = [
+          { key: "name", name: "Name", placeholder: "Name..." },
+          { key: "city", name: "City", placeholder: "City..." },
+          { key: "country", name: "Country", placeholder: "Country..." },
+          { key: "emailAddress", name: "E-Mail", placeholder: "E-Mail..." },
+          { key: "job", name: "Job", placeholder: "Job..." }
+        ];
+```
+
 Then in your view
 
 ```html
