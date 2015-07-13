@@ -16,7 +16,8 @@ angular.module('angular-advanced-searchbox', [])
             restrict: 'E',
             scope: {
                 model: '=ngModel',
-                parameters: '='
+                parameters: '=',
+                placeholder: '@'
             },
             replace: true,
             templateUrl: 'angular-advanced-searchbox.html',
@@ -24,7 +25,7 @@ angular.module('angular-advanced-searchbox', [])
                 '$scope', '$attrs', '$element', '$timeout', '$filter',
                 function ($scope, $attrs, $element, $timeout, $filter) {
 
-                    $scope.placeholder = $attrs.placeholder || 'Search ...';
+                    $scope.placeholder = $scope.placeholder || 'Search ...';
                     $scope.searchParams = [];
                     $scope.searchQuery = '';
                     $scope.setSearchFocus = false;
