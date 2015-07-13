@@ -10,14 +10,15 @@
             </a>
             <div class="key">{{searchParam.name}}:</div>
             <div class="value">
-                <span ng-show="!searchParam.editMode" ng-click="enterEditMode($index)">{{searchParam.value}}</span>
+                <span ng-if="!searchParam.editMode" ng-click="enterEditMode($index)">{{searchParam.value}}</span>
                 <input name="value"
                        type="text"
                        nit-auto-size-input
                        nit-set-focus="searchParam.editMode"
                        ng-keydown="keydown($event, $index)"
                        ng-blur="leaveEditMode($index)"
-                       ng-show="searchParam.editMode"
+                       ng-if="searchParam.editMode"
+                       ng-change="searchParamValueChanged(searchParam)"
                        ng-model="searchParam.value"
                        placeholder="{{searchParam.placeholder}}" />
             </div>
@@ -25,17 +26,19 @@
         <input name="searchbox"
                class="search-parameter-input"
                type="text"
+               nit-auto-size-input
                nit-set-focus="setSearchFocus"
                ng-keydown="keydown($event)"
                placeholder="{{placeholder}}"
                ng-focus="focus = true"
                ng-blur="focus = false"
                typeahead-on-select="typeaheadOnSelect($item, $model, $label)"
-               typeahead="parameter as parameter.name for parameter in parameters | filter:{name:$viewValue} | limitTo:8"
+               typeahead="parameter as parameter.name for parameter in parameters | filter:isUnsedParameter | filter:{name:$viewValue} | limitTo:8"
+               ng-change="searchQueryChanged(searchQuery)"
                ng-model="searchQuery" />
     </div>
     <div class="search-parameter-suggestions" ng-show="parameters && focus">
         <span class="title">Parameter Suggestions:</span>
-        <span class="search-parameter" ng-repeat="param in parameters | limitTo:8" ng-mousedown="addSearchParam(param)">{{param.name}}</span>
+        <span class="search-parameter" ng-repeat="param in parameters | filter:isUnsedParameter | limitTo:8" ng-mousedown="addSearchParam(param)">{{param.name}}</span>
     </div>
 </div>
