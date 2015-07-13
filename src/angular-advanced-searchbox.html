@@ -1,4 +1,4 @@
-<div class="advancedSearchBox" ng-class="{active:focus}" ng-init="focus = false">
+<div class="advancedSearchBox" ng-class="{active:focus}" ng-init="focus = false" ng-click="!focus ? setSearchFocus = true : null">
     <span ng-show="searchParams.length < 1 && searchQuery.length === 0" class="search-icon glyphicon glyphicon-search"></span>
     <a ng-href="" ng-show="searchParams.length > 0 || searchQuery.length > 0" ng-click="removeAll()" role="button">
         <span class="remove-all-icon glyphicon glyphicon-trash"></span>
