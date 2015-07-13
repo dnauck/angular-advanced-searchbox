@@ -38,6 +38,17 @@
           { key: "emailAddress", name: "E-Mail", placeholder: "E-Mail..." },
           { key: "job", name: "Job", placeholder: "Job..." }
         ];
+
+        $scope.addPredefinedNameSearchParam = function(){
+          $scope.searchParams.name = 'Max Mustermann';
+        };
+
+        $scope.loadPredefinedSearchParamSet = function(){
+          $scope.searchParams = {
+            name: "Max M.",
+            job: "Boss"
+          };
+        };
       });
     </script>
   </head>
@@ -83,9 +94,24 @@
             <pre><code>{{searchParams}}</code></pre>
             The output model could be directly used as params object for Angular's $http API.
           </p>
+          <p>
+            <strong>Test:</strong> loading predefined search parameters via code:<br />
+            <button class="btn btn-info" ng-click="addPredefinedNameSearchParam()">Add predefined "Name" Search Parameter</button>
+            <button class="btn btn-info" ng-click="loadPredefinedSearchParamSet()">Load predefined Search Parameter Set</button>
+          </p>
         </div>
         <div class="col-sm-12">
           <h2>Getting started</h2>
+          <p>Define the available search parameters in your controller's code:</p>
+          <p>
+            <pre><code>$scope.availableSearchParams = [
+  { key: "name", name: "Name", placeholder: "Name..." },
+  { key: "city", name: "City", placeholder: "City..." },
+  { key: "country", name: "Country", placeholder: "Country..." },
+  { key: "emailAddress", name: "E-Mail", placeholder: "E-Mail..." },
+  { key: "job", name: "Job", placeholder: "Job..." }
+];</code></pre>
+          </p>
           <p>Add the following AngularJS directive to your HTML:</p>
           <p>
             <pre><code>&#60;nit-advanced-searchbox ng-model="searchParams" parameters="availableSearchParams" placeholder="Search..."&#62;&#60;/nit-advanced-searchbox&#62;</code></pre>
