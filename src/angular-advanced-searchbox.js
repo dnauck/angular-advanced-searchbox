@@ -17,6 +17,8 @@ angular.module('angular-advanced-searchbox', [])
             scope: {
                 model: '=ngModel',
                 parameters: '=',
+                defaultparams: '=',
+                enter: '=',
                 placeholder: '@'
             },
             replace: true,
@@ -29,11 +31,23 @@ angular.module('angular-advanced-searchbox', [])
                     $scope.searchParams = [];
                     $scope.searchQuery = '';
                     $scope.setSearchFocus = false;
+                    $scope.Enter = $scope.enter;
                     var searchThrottleTimer;
                     var changeBuffer = [];
+                    if ($scope.defaultparams) {
+                       if (!$scope.defaultparams.query) {
+                          $scope.defaultparams.query = '';
+                       }
+                    } else {
+                        $scope.defaultparams = {};
+                    }
+                    $scope.model = angular.copy($scope.defaultparams);
+
+                    $scope.$watch('defaultparams', function () {
+                       $scope.model = angular.copy($scope.defaultparams);
+                    });
 
                     $scope.$watch('model', function (newValue, oldValue) {
-
                         if(angular.equals(newValue, oldValue))
                             return;
 
@@ -62,6 +76,9 @@ angular.module('angular-advanced-searchbox', [])
                         });
                     }, true);
 
+                    $scope.isDefault = function () {
+                        return angular.equals($scope.defaultparams, $scope.model)
+                    }
                     $scope.searchParamValueChanged = function (param) {
                         updateModel('change', param.key, param.value);
                     };
@@ -76,6 +93,7 @@ angular.module('angular-advanced-searchbox', [])
 
                         var searchParam = $scope.searchParams[index];
                         searchParam.editMode = true;
+                        $scope.focus = true; // by GatorLiu
                     };
 
                     $scope.leaveEditMode = function(index) {
@@ -112,11 +130,18 @@ angular.module('angular-advanced-searchbox', [])
                                 key: searchParam.key,
                                 name: searchParam.name,
                                 placeholder: searchParam.placeholder,
+                                type: searchParam.type, // GatorLiu
+                                options : searchParam.options, // GatorLiu
+                                required:searchParam.required,
                                 value: value || '',
                                 editMode: enterEditModel
                             }
                         );
-
+                        if (value === undefined) {
+                           $timeout( function(){
+                              $scope.focus = true;
+                           })
+                        }
                         updateModel('add', searchParam.key, value);
                     };
 
@@ -125,6 +150,7 @@ angular.module('angular-advanced-searchbox', [])
                             return;
 
                         var searchParam = $scope.searchParams[index];
+                        if (searchParam.required) return;
                         $scope.searchParams.splice(index, 1);
 
                         updateModel('delete', searchParam.key);
@@ -135,6 +161,8 @@ angular.module('angular-advanced-searchbox', [])
                         $scope.searchQuery = '';
                         
                         $scope.model = {};
+                        $scope.model= angular.copy($scope.defaultparams);
+                        $scope.focus = false;
                     };
 
                     $scope.editPrevious = function(currentIndex) {
@@ -142,10 +170,14 @@ angular.module('angular-advanced-searchbox', [])
                             $scope.leaveEditMode(currentIndex);
 
                         //TODO: check if index == 0 -> what then?
+                        console.log(currentIndex)
                         if (currentIndex > 0) {
                             $scope.enterEditMode(currentIndex - 1);
+                        //} else if (currentIndex === undefined) {
+                        //    $scope.enterEditMode($scope.searchParams.length - 1);
                         } else if ($scope.searchParams.length > 0) {
                             $scope.enterEditMode($scope.searchParams.length - 1);
+                        //    $scope.setSearchFocus = true;
                         }
                     };
 
@@ -167,12 +199,30 @@ angular.module('angular-advanced-searchbox', [])
                         var handledKeys = [8, 9, 13, 37, 39];
                         if (handledKeys.indexOf(e.which) === -1)
                             return;
-
-                        var cursorPosition = getCurrentCaretPosition(e.target);
+/* 
+ * Most browsers( IE, firefox, safari..) not suport html5 input type 'date',
+                        if (e.target.type == 'date'){
+                           if (e.which == 13) { // enter
+                              $scope.editNext(searchParamIndex);
+                           }
+                           return;
+                        }
+*/
+                        try{
+                           var notSupportType  = false;
+                           var cursorPosition = getCurrentCaretPosition(e.target);
+                        } catch(e) {
+                           notSupportType = true; 
+                        }
 
                         if (e.which == 8) { // backspace
-                            if (cursorPosition === 0)
-                                $scope.editPrevious(searchParamIndex);
+                            if ( notSupportType || cursorPosition === 0) {
+                                e.preventDefault();
+                                if (searchParamIndex == 0)
+                                    $scope.editNext(searchParamIndex);
+                                else
+                                    $scope.editPrevious(searchParamIndex);
+                            }
 
                         } else if (e.which == 9) { // tab
                             if (e.shiftKey) {
@@ -236,6 +286,7 @@ angular.module('angular-advanced-searchbox', [])
                             });
 
                             changeBuffer.length = 0;
+                            //$scope.focus = true; // by GatorLiu for <select> Click 
                         }, 500);
                     }
 
