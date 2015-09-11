@@ -77,8 +77,8 @@ angular.module('angular-advanced-searchbox', [])
                     }, true);
 
                     $scope.isDefault = function () {
-                        return angular.equals($scope.defaultparams, $scope.model)
-                    }
+                        return angular.equals($scope.defaultparams, $scope.model);
+                    };
                     $scope.searchParamValueChanged = function (param) {
                         updateModel('change', param.key, param.value);
                     };
@@ -140,7 +140,7 @@ angular.module('angular-advanced-searchbox', [])
                         if (value === undefined) {
                            $timeout( function(){
                               $scope.focus = true;
-                           })
+                           });
                         }
                         updateModel('add', searchParam.key, value);
                     };
@@ -170,7 +170,7 @@ angular.module('angular-advanced-searchbox', [])
                             $scope.leaveEditMode(currentIndex);
 
                         //TODO: check if index == 0 -> what then?
-                        console.log(currentIndex)
+                        //console.log(currentIndex)
                         if (currentIndex > 0) {
                             $scope.enterEditMode(currentIndex - 1);
                         //} else if (currentIndex === undefined) {
@@ -208,17 +208,19 @@ angular.module('angular-advanced-searchbox', [])
                            return;
                         }
 */
+                        var notSupportType;
+                        var cursorPosition;
                         try{
-                           var notSupportType  = false;
-                           var cursorPosition = getCurrentCaretPosition(e.target);
-                        } catch(e) {
+                           notSupportType  = false;
+                           cursorPosition = getCurrentCaretPosition(e.target);
+                        } catch(err) {
                            notSupportType = true; 
                         }
 
                         if (e.which == 8) { // backspace
                             if ( notSupportType || cursorPosition === 0) {
                                 e.preventDefault();
-                                if (searchParamIndex == 0)
+                                if (searchParamIndex === 0)
                                     $scope.editNext(searchParamIndex);
                                 else
                                     $scope.editPrevious(searchParamIndex);
