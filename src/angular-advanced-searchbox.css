@@ -71,7 +71,7 @@
 
     .advancedSearchBox .search-parameter-input {
         display: inline-block;
-        width: auto;
+        width: 100px;
         height: 24px;
         border: 0;
         margin: 0;
