@@ -17,7 +17,8 @@ angular.module('angular-advanced-searchbox', [])
             scope: {
                 model: '=ngModel',
                 parameters: '=',
-                placeholder: '@'
+                placeholder: '@',
+                focus: '='
             },
             replace: true,
             templateUrl: 'angular-advanced-searchbox.html',
