@@ -171,8 +171,10 @@ angular.module('angular-advanced-searchbox', [])
                         var cursorPosition = getCurrentCaretPosition(e.target);
 
                         if (e.which == 8) { // backspace
-                            if (cursorPosition === 0)
+                            if (cursorPosition === 0) {
+                                e.preventDefault();
                                 $scope.editPrevious(searchParamIndex);
+                            }
 
                         } else if (e.which == 9) { // tab
                             if (e.shiftKey) {
