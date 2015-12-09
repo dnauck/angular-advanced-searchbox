@@ -6,6 +6,7 @@
 * correctly handle isolation scope of 'placeholder' attribute, fixed #15
 * revert change for issue #3, click on container element enables focus, fixed #14
 * fixed browser back behaviour when removing queries, pull request #23
+* add option to configure the suggested parameter label text
 
 ### 1.1.1 - 03 February 2015
 * update README with latest changes to dist files in bower package

@@ -89,6 +89,10 @@ param can be a scope variable as well as a hard-coded string.
       <td>List of available parameters to search for.</td>
     </tr>
     <tr>
+      <td>parametersLabel</td>
+      <td>Text for the suggested parameters label, e.g. "Parameter Suggestions".</td>
+    </tr>
+    <tr>
       <td>placeholder</td>
       <td>specifies a short hint in the search box</td>
     </tr>

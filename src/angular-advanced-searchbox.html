@@ -38,7 +38,7 @@
                ng-model="searchQuery" />
     </div>
     <div class="search-parameter-suggestions" ng-show="parameters && focus">
-        <span class="title">Parameter Suggestions:</span>
+        <span class="title">{{parametersLabel}}:</span>
         <span class="search-parameter" ng-repeat="param in parameters | filter:isUnsedParameter | limitTo:8" ng-mousedown="addSearchParam(param)">{{param.name}}</span>
     </div>
 </div>

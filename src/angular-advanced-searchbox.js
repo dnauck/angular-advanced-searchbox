@@ -17,6 +17,7 @@ angular.module('angular-advanced-searchbox', [])
             scope: {
                 model: '=ngModel',
                 parameters: '=',
+                parametersLabel: '@',
                 placeholder: '@'
             },
             replace: true,
@@ -25,6 +26,7 @@ angular.module('angular-advanced-searchbox', [])
                 '$scope', '$attrs', '$element', '$timeout', '$filter',
                 function ($scope, $attrs, $element, $timeout, $filter) {
 
+                    $scope.parametersLabel = $scope.parametersLabel || 'Parameter Suggestions';
                     $scope.placeholder = $scope.placeholder || 'Search ...';
                     $scope.searchParams = [];
                     $scope.searchQuery = '';
