@@ -72,7 +72,10 @@ angular.module('angular-advanced-searchbox', [])
                         updateModel('change', 'query', query);
                     };
 
-                    $scope.enterEditMode = function(index) {
+                    $scope.enterEditMode = function(e, index) {
+                        if(e !== undefined)
+                            e.stopPropagation();
+
                         if (index === undefined)
                             return;
 
@@ -80,7 +83,7 @@ angular.module('angular-advanced-searchbox', [])
                         searchParam.editMode = true;
                     };
 
-                    $scope.leaveEditMode = function(index) {
+                    $scope.leaveEditMode = function(e, index) {
                         if (index === undefined)
                             return;
 
@@ -141,13 +144,13 @@ angular.module('angular-advanced-searchbox', [])
 
                     $scope.editPrevious = function(currentIndex) {
                         if (currentIndex !== undefined)
-                            $scope.leaveEditMode(currentIndex);
+                            $scope.leaveEditMode(undefined, currentIndex);
 
                         //TODO: check if index == 0 -> what then?
                         if (currentIndex > 0) {
-                            $scope.enterEditMode(currentIndex - 1);
+                            $scope.enterEditMode(undefined, currentIndex - 1);
                         } else if ($scope.searchParams.length > 0) {
-                            $scope.enterEditMode($scope.searchParams.length - 1);
+                            $scope.enterEditMode(undefined, $scope.searchParams.length - 1);
                         }
                     };
 
@@ -155,11 +158,11 @@ angular.module('angular-advanced-searchbox', [])
                         if (currentIndex === undefined)
                             return;
 
-                        $scope.leaveEditMode(currentIndex);
+                        $scope.leaveEditMode(undefined, currentIndex);
 
                         //TODO: check if index == array length - 1 -> what then?
                         if (currentIndex < $scope.searchParams.length - 1) {
-                            $scope.enterEditMode(currentIndex + 1);
+                            $scope.enterEditMode(undefined, currentIndex + 1);
                         } else {
                             $scope.setSearchFocus = true;
                         }

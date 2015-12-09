@@ -5,6 +5,7 @@
 * Hide in use search parameter suggestions, fixed issue #8
 * correctly handle isolation scope of 'placeholder' attribute, fixed #15
 * revert change for issue #3, click on container element enables focus, fixed #14
+* fixed entering the edit mode by clicking on a search parameter, fixed #3 #14 #21
 * fixed browser back behaviour when removing queries, pull request #23
 * add option to configure the suggested parameter label text
 
