@@ -89,6 +89,10 @@ param can be a scope variable as well as a hard-coded string.
       <td>List of available parameters to search for.</td>
     </tr>
     <tr>
+      <td>parametersDisplayLimit</td>
+      <td>Maximum number of suggested parameters to display. Default is 8.</td>
+    </tr>
+    <tr>
       <td>parametersLabel</td>
       <td>Text for the suggested parameters label, e.g. "Parameter Suggestions".</td>
     </tr>

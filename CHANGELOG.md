@@ -8,6 +8,7 @@
 * fixed entering the edit mode by clicking on a search parameter, fixed #3 #14 #21
 * fixed browser back behaviour when removing queries, pull request #23
 * add option to configure the suggested parameter label text
+* allow to specify the display limit of search parameter suggestions
 
 ### 1.1.1 - 03 February 2015
 * update README with latest changes to dist files in bower package
