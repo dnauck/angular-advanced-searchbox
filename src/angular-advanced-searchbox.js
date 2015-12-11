@@ -85,6 +85,8 @@ angular.module('angular-advanced-searchbox', [])
 
                         var searchParam = $scope.searchParams[index];
                         searchParam.editMode = true;
+
+                        $scope.$emit('advanced-searchbox:enteredEditMode', searchParam);
                     };
 
                     $scope.leaveEditMode = function(e, index) {
@@ -93,6 +95,8 @@ angular.module('angular-advanced-searchbox', [])
 
                         var searchParam = $scope.searchParams[index];
                         searchParam.editMode = false;
+
+                        $scope.$emit('advanced-searchbox:leavedEditMode', searchParam);
 
                         // remove empty search params
                         if (!searchParam.value)
@@ -247,6 +251,9 @@ angular.module('angular-advanced-searchbox', [])
                             });
 
                             changeBuffer.length = 0;
+
+                            $scope.$emit('advanced-searchbox:modelUpdated', $scope.model);
+
                         }, $scope.searchThrottleTime);
                     }
 

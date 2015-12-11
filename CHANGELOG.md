@@ -10,6 +10,7 @@
 * add option to configure the suggested parameter label text
 * allow to specify the display limit of search parameter suggestions
 * allow to specify the search throttle time
+* add certain events you can subscribe to (enter / leave edit mode, model update)
 
 ### 1.1.1 - 03 February 2015
 * update README with latest changes to dist files in bower package
