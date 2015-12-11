@@ -1,6 +1,6 @@
 {
   "name": "angular-advanced-searchbox",
-  "version": "2.0.0-dev",
+  "version": "2.0.0",
   "description": "A directive for AngularJS providing a advanced visual search box",
   "main": "dist/angular-advanced-searchbox-tpls.js",
   "repository": {

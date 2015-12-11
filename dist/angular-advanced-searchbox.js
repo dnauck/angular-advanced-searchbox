@@ -17,7 +17,10 @@ angular.module('angular-advanced-searchbox', [])
             scope: {
                 model: '=ngModel',
                 parameters: '=',
-                placeholder: '@'
+                parametersLabel: '@',
+                parametersDisplayLimit: '=',
+                placeholder: '@',
+                searchThrottleTime: '='
             },
             replace: true,
             templateUrl: 'angular-advanced-searchbox.html',
@@ -25,7 +28,10 @@ angular.module('angular-advanced-searchbox', [])
                 '$scope', '$attrs', '$element', '$timeout', '$filter',
                 function ($scope, $attrs, $element, $timeout, $filter) {
 
+                    $scope.parametersLabel = $scope.parametersLabel || 'Parameter Suggestions';
+                    $scope.parametersDisplayLimit = $scope.parametersDisplayLimit || 8;
                     $scope.placeholder = $scope.placeholder || 'Search ...';
+                    $scope.searchThrottleTime = $scope.searchThrottleTime || 1000;
                     $scope.searchParams = [];
                     $scope.searchQuery = '';
                     $scope.setSearchFocus = false;
@@ -70,20 +76,27 @@ angular.module('angular-advanced-searchbox', [])
                         updateModel('change', 'query', query);
                     };
 
-                    $scope.enterEditMode = function(index) {
+                    $scope.enterEditMode = function(e, index) {
+                        if(e !== undefined)
+                            e.stopPropagation();
+
                         if (index === undefined)
                             return;
 
                         var searchParam = $scope.searchParams[index];
                         searchParam.editMode = true;
+
+                        $scope.$emit('advanced-searchbox:enteredEditMode', searchParam);
                     };
 
-                    $scope.leaveEditMode = function(index) {
+                    $scope.leaveEditMode = function(e, index) {
                         if (index === undefined)
                             return;
 
                         var searchParam = $scope.searchParams[index];
                         searchParam.editMode = false;
+
+                        $scope.$emit('advanced-searchbox:leavedEditMode', searchParam);
 
                         // remove empty search params
                         if (!searchParam.value)
@@ -139,13 +152,13 @@ angular.module('angular-advanced-searchbox', [])
 
                     $scope.editPrevious = function(currentIndex) {
                         if (currentIndex !== undefined)
-                            $scope.leaveEditMode(currentIndex);
+                            $scope.leaveEditMode(undefined, currentIndex);
 
                         //TODO: check if index == 0 -> what then?
                         if (currentIndex > 0) {
-                            $scope.enterEditMode(currentIndex - 1);
+                            $scope.enterEditMode(undefined, currentIndex - 1);
                         } else if ($scope.searchParams.length > 0) {
-                            $scope.enterEditMode($scope.searchParams.length - 1);
+                            $scope.enterEditMode(undefined, $scope.searchParams.length - 1);
                         }
                     };
 
@@ -153,11 +166,11 @@ angular.module('angular-advanced-searchbox', [])
                         if (currentIndex === undefined)
                             return;
 
-                        $scope.leaveEditMode(currentIndex);
+                        $scope.leaveEditMode(undefined, currentIndex);
 
                         //TODO: check if index == array length - 1 -> what then?
                         if (currentIndex < $scope.searchParams.length - 1) {
-                            $scope.enterEditMode(currentIndex + 1);
+                            $scope.enterEditMode(undefined, currentIndex + 1);
                         } else {
                             $scope.setSearchFocus = true;
                         }
@@ -171,8 +184,10 @@ angular.module('angular-advanced-searchbox', [])
                         var cursorPosition = getCurrentCaretPosition(e.target);
 
                         if (e.which == 8) { // backspace
-                            if (cursorPosition === 0)
+                            if (cursorPosition === 0) {
+                                e.preventDefault();
                                 $scope.editPrevious(searchParamIndex);
+                            }
 
                         } else if (e.which == 9) { // tab
                             if (e.shiftKey) {
@@ -236,7 +251,10 @@ angular.module('angular-advanced-searchbox', [])
                             });
 
                             changeBuffer.length = 0;
-                        }, 500);
+
+                            $scope.$emit('advanced-searchbox:modelUpdated', $scope.model);
+
+                        }, $scope.searchThrottleTime);
                     }
 
                     function getCurrentCaretPosition(input) {
