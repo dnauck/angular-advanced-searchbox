@@ -9,6 +9,7 @@
 * fixed browser back behaviour when removing queries, pull request #23
 * add option to configure the suggested parameter label text
 * allow to specify the display limit of search parameter suggestions
+* allow to specify the search throttle time
 
 ### 1.1.1 - 03 February 2015
 * update README with latest changes to dist files in bower package

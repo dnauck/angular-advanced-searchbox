@@ -19,7 +19,8 @@ angular.module('angular-advanced-searchbox', [])
                 parameters: '=',
                 parametersLabel: '@',
                 parametersDisplayLimit: '=',
-                placeholder: '@'
+                placeholder: '@',
+                searchThrottleTime: '='
             },
             replace: true,
             templateUrl: 'angular-advanced-searchbox.html',
@@ -30,6 +31,7 @@ angular.module('angular-advanced-searchbox', [])
                     $scope.parametersLabel = $scope.parametersLabel || 'Parameter Suggestions';
                     $scope.parametersDisplayLimit = $scope.parametersDisplayLimit || 8;
                     $scope.placeholder = $scope.placeholder || 'Search ...';
+                    $scope.searchThrottleTime = $scope.searchThrottleTime || 1000;
                     $scope.searchParams = [];
                     $scope.searchQuery = '';
                     $scope.setSearchFocus = false;
@@ -245,7 +247,7 @@ angular.module('angular-advanced-searchbox', [])
                             });
 
                             changeBuffer.length = 0;
-                        }, 500);
+                        }, $scope.searchThrottleTime);
                     }
 
                     function getCurrentCaretPosition(input) {

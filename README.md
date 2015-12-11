@@ -98,7 +98,11 @@ param can be a scope variable as well as a hard-coded string.
     </tr>
     <tr>
       <td>placeholder</td>
-      <td>specifies a short hint in the search box</td>
+      <td>Specifies a short hint in the search box</td>
+    </tr>
+    <tr>
+      <td>searchThrottleTime</td>
+      <td>Specifies the time in milliseconds to wait for changes in the ui until the ng-model is updated. Default is 1000ms.</td>
     </tr>
   </tbody>
 </table>
