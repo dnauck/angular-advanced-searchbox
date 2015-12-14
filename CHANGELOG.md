@@ -1,5 +1,6 @@
 ### 2.0.1 - 14 December 2015
 * enter and leave edit mode methods and events was not called every time due ng-if directive, fixed #17
+* workaround a small timing issue and enable edit mode explicit on newly added parameters
 
 ### 2.0.0 - 11 December 2015
 * Support to add, delete search parameters and change search parameter's values via ng-model, fixed issue #7, #9 and #10

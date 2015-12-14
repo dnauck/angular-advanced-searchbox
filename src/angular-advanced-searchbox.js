@@ -120,15 +120,18 @@ angular.module('angular-advanced-searchbox', [])
                         if (!$scope.isUnsedParameter(searchParam))
                             return;
 
-                        $scope.searchParams.push(
-                            {
-                                key: searchParam.key,
-                                name: searchParam.name,
-                                placeholder: searchParam.placeholder,
-                                value: value || '',
-                                editMode: enterEditModel
-                            }
-                        );
+                        var newIndex = 
+                            $scope.searchParams.push(
+                                {
+                                    key: searchParam.key,
+                                    name: searchParam.name,
+                                    placeholder: searchParam.placeholder,
+                                    value: value || ''
+                                }
+                            ) - 1;
+
+                        if (enterEditModel === true)
+                            $timeout(function() { $scope.enterEditMode(undefined, newIndex); }, 100);
 
                         updateModel('add', searchParam.key, value);
                     };
