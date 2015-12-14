@@ -1,3 +1,6 @@
+### 2.0.1 - 14 December 2015
+* enter and leave edit mode methods and events was not called every time due ng-if directive, fixed #17
+
 ### 2.0.0 - 11 December 2015
 * Support to add, delete search parameters and change search parameter's values via ng-model, fixed issue #7, #9 and #10
 * change main property of package.json to final build in dist folder, fixes #4
