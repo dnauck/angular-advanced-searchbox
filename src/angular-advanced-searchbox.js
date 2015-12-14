@@ -23,7 +23,9 @@ angular.module('angular-advanced-searchbox', [])
                 searchThrottleTime: '='
             },
             replace: true,
-            templateUrl: 'angular-advanced-searchbox.html',
+            templateUrl: function(element, attr) {
+                return attr.templateUrl || 'angular-advanced-searchbox.html';
+            },
             controller: [
                 '$scope', '$attrs', '$element', '$timeout', '$filter',
                 function ($scope, $attrs, $element, $timeout, $filter) {
