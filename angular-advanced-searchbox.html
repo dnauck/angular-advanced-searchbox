@@ -10,14 +10,14 @@
             </a>
             <div class="key" ng-click="enterEditMode($event, $index)">{{searchParam.name}}:</div>
             <div class="value">
-                <span ng-if="!searchParam.editMode" ng-click="enterEditMode($event, $index)">{{searchParam.value}}</span>
+                <span ng-show="!searchParam.editMode" ng-click="enterEditMode($event, $index)">{{searchParam.value}}</span>
                 <input name="value"
                        type="text"
                        nit-auto-size-input
                        nit-set-focus="searchParam.editMode"
                        ng-keydown="keydown($event, $index)"
                        ng-blur="leaveEditMode($event, $index)"
-                       ng-if="searchParam.editMode"
+                       ng-show="searchParam.editMode"
                        ng-change="searchParamValueChanged(searchParam)"
                        ng-model="searchParam.value"
                        placeholder="{{searchParam.placeholder}}" />
