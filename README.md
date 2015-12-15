@@ -126,3 +126,45 @@ $scope.$on('advanced-searchbox:modelUpdated', function (event, model) {
   ///
 });
 ```
+
+### Available Search Parameters Properties
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>key</td>
+      <td>Unique key of the search parameter that is used for the ng-model value.</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>User friendly display name of the search parameter.</td>
+    </tr>
+    <tr>
+      <td>placeholder</td>
+      <td>Specifies a short hint in the parameter search box</td>
+    </tr>
+    <tr>
+      <td>suggestedValues</td>
+      <td>An array of suggested search values, e.g. ['Berlin', 'London', 'Paris']</td>
+    </tr>
+    <tr>
+      <td>restrictToSuggestedValues</td>
+      <td>Should it restrict possible search values tothe ones from the suggestedValues array?</td>
+    </tr>
+  </tbody>
+</table>
+
+Full example:
+
+```js
+$scope.availableSearchParams = [
+          { key: "name", name: "Name", placeholder: "Name..." },
+          { key: "city", name: "City", placeholder: "City...", restrictToSuggestedValues: true, suggestedValues: ['Berlin', 'London', 'Paris'] }
+        ];
+```
