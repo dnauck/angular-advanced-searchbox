@@ -155,7 +155,7 @@ $scope.$on('advanced-searchbox:modelUpdated', function (event, model) {
     </tr>
     <tr>
       <td>restrictToSuggestedValues</td>
-      <td>Should it restrict possible search values tothe ones from the suggestedValues array?</td>
+      <td>Should it restrict possible search values to the ones from the suggestedValues array?</td>
     </tr>
   </tbody>
 </table>
