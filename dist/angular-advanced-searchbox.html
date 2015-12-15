@@ -18,8 +18,13 @@
                        ng-keydown="keydown($event, $index)"
                        ng-blur="leaveEditMode($event, $index)"
                        ng-show="searchParam.editMode"
-                       ng-change="searchParamValueChanged(searchParam)"
+                       ng-change="searchParam.restrictToSuggestedValues !== true ? searchParamValueChanged(searchParam) : null"
                        ng-model="searchParam.value"
+                       typeahead-on-select="searchParamTypeaheadOnSelect($item, searchParam)"
+                       typeahead="suggestedValue for suggestedValue in searchParam.suggestedValues | filter:$viewValue"
+                       typeahead-editable="searchParam.restrictToSuggestedValues !== true"
+                       typeahead-select-on-exact="true"
+                       typeahead-select-on-blur="searchParam.restrictToSuggestedValues !== true ? false : true"
                        placeholder="{{searchParam.placeholder}}" />
             </div>
         </div>
@@ -32,7 +37,7 @@
                placeholder="{{placeholder}}"
                ng-focus="focus = true"
                ng-blur="focus = false"
-               typeahead-on-select="typeaheadOnSelect($item, $model, $label)"
+               typeahead-on-select="searchQueryTypeaheadOnSelect($item, $model, $label)"
                typeahead="parameter as parameter.name for parameter in parameters | filter:isUnsedParameter | filter:{name:$viewValue} | limitTo:parametersDisplayLimit"
                ng-change="searchQueryChanged(searchQuery)"
                ng-model="searchQuery" />
