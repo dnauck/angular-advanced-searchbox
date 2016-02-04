@@ -1,5 +1,6 @@
 ### 2.1.0 - unreleased
 * add support for suggested values for a search parameter with typeahead support, fixed #11
+* fix optional parameters on AngularJS 1.4.9, fixed #31 and #34
 
 ### 2.0.1 - 14 December 2015
 * enter and leave edit mode methods and events was not called every time due ng-if directive, fixed #17

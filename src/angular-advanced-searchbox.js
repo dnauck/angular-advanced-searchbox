@@ -18,9 +18,9 @@ angular.module('angular-advanced-searchbox', [])
                 model: '=ngModel',
                 parameters: '=',
                 parametersLabel: '@',
-                parametersDisplayLimit: '=',
+                parametersDisplayLimit: '=?',
                 placeholder: '@',
-                searchThrottleTime: '='
+                searchThrottleTime: '=?'
             },
             replace: true,
             templateUrl: function(element, attr) {
