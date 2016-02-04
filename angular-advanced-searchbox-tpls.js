@@ -18,9 +18,9 @@ angular.module('angular-advanced-searchbox', [])
                 model: '=ngModel',
                 parameters: '=',
                 parametersLabel: '@',
-                parametersDisplayLimit: '=',
+                parametersDisplayLimit: '=?',
                 placeholder: '@',
-                searchThrottleTime: '='
+                searchThrottleTime: '=?'
             },
             replace: true,
             templateUrl: function(element, attr) {
@@ -105,10 +105,15 @@ angular.module('angular-advanced-searchbox', [])
                             $scope.removeSearchParam(index);
                     };
 
-                    $scope.typeaheadOnSelect = function (item, model, label) {
+                    $scope.searchQueryTypeaheadOnSelect = function (item, model, label) {
                         $scope.addSearchParam(item);
                         $scope.searchQuery = '';
                         updateModel('delete', 'query');
+                    };
+
+                    $scope.searchParamTypeaheadOnSelect = function (suggestedValue, searchParam) {
+                        searchParam.value = suggestedValue;
+                        $scope.searchParamValueChanged(searchParam);
                     };
 
                     $scope.isUnsedParameter = function (value, index) {
@@ -128,6 +133,8 @@ angular.module('angular-advanced-searchbox', [])
                                     key: searchParam.key,
                                     name: searchParam.name,
                                     placeholder: searchParam.placeholder,
+                                    suggestedValues: searchParam.suggestedValues || [],
+                                    restrictToSuggestedValues: searchParam.restrictToSuggestedValues || false,
                                     value: value || ''
                                 }
                             ) - 1;
@@ -352,7 +359,7 @@ angular.module('angular-advanced-searchbox').run(['$templateCache', function($te
   'use strict';
 
   $templateCache.put('angular-advanced-searchbox.html',
-    "<div class=advancedSearchBox ng-class={active:focus} ng-init=\"focus = false\" ng-click=\"!focus ? setSearchFocus = true : null\"><span ng-show=\"searchParams.length < 1 && searchQuery.length === 0\" class=\"search-icon glyphicon glyphicon-search\"></span> <a ng-href=\"\" ng-show=\"searchParams.length > 0 || searchQuery.length > 0\" ng-click=removeAll() role=button><span class=\"remove-all-icon glyphicon glyphicon-trash\"></span></a><div><div class=search-parameter ng-repeat=\"searchParam in searchParams\"><a ng-href=\"\" ng-click=removeSearchParam($index) role=button><span class=\"remove glyphicon glyphicon-trash\"></span></a><div class=key ng-click=\"enterEditMode($event, $index)\">{{searchParam.name}}:</div><div class=value><span ng-show=!searchParam.editMode ng-click=\"enterEditMode($event, $index)\">{{searchParam.value}}</span> <input name=value nit-auto-size-input nit-set-focus=searchParam.editMode ng-keydown=\"keydown($event, $index)\" ng-blur=\"leaveEditMode($event, $index)\" ng-show=searchParam.editMode ng-change=searchParamValueChanged(searchParam) ng-model=searchParam.value placeholder=\"{{searchParam.placeholder}}\"></div></div><input name=searchbox class=search-parameter-input nit-auto-size-input nit-set-focus=setSearchFocus ng-keydown=keydown($event) placeholder={{placeholder}} ng-focus=\"focus = true\" ng-blur=\"focus = false\" typeahead-on-select=\"typeaheadOnSelect($item, $model, $label)\" typeahead=\"parameter as parameter.name for parameter in parameters | filter:isUnsedParameter | filter:{name:$viewValue} | limitTo:parametersDisplayLimit\" ng-change=searchQueryChanged(searchQuery) ng-model=\"searchQuery\"></div><div class=search-parameter-suggestions ng-show=\"parameters && focus\"><span class=title>{{parametersLabel}}:</span> <span class=search-parameter ng-repeat=\"param in parameters | filter:isUnsedParameter | limitTo:parametersDisplayLimit\" ng-mousedown=addSearchParam(param)>{{param.name}}</span></div></div>"
+    "<div class=advancedSearchBox ng-class={active:focus} ng-init=\"focus = false\" ng-click=\"!focus ? setSearchFocus = true : null\"><span ng-show=\"searchParams.length < 1 && searchQuery.length === 0\" class=\"search-icon glyphicon glyphicon-search\"></span> <a ng-href=\"\" ng-show=\"searchParams.length > 0 || searchQuery.length > 0\" ng-click=removeAll() role=button><span class=\"remove-all-icon glyphicon glyphicon-trash\"></span></a><div><div class=search-parameter ng-repeat=\"searchParam in searchParams\"><a ng-href=\"\" ng-click=removeSearchParam($index) role=button><span class=\"remove glyphicon glyphicon-trash\"></span></a><div class=key ng-click=\"enterEditMode($event, $index)\">{{searchParam.name}}:</div><div class=value><span ng-show=!searchParam.editMode ng-click=\"enterEditMode($event, $index)\">{{searchParam.value}}</span> <input name=value nit-auto-size-input nit-set-focus=searchParam.editMode ng-keydown=\"keydown($event, $index)\" ng-blur=\"leaveEditMode($event, $index)\" ng-show=searchParam.editMode ng-change=\"searchParam.restrictToSuggestedValues !== true ? searchParamValueChanged(searchParam) : null\" ng-model=searchParam.value typeahead-on-select=\"searchParamTypeaheadOnSelect($item, searchParam)\" typeahead=\"suggestedValue for suggestedValue in searchParam.suggestedValues | filter:$viewValue\" typeahead-editable=\"searchParam.restrictToSuggestedValues !== true\" typeahead-select-on-exact=true typeahead-select-on-blur=\"searchParam.restrictToSuggestedValues !== true ? false : true\" placeholder=\"{{searchParam.placeholder}}\"></div></div><input name=searchbox class=search-parameter-input nit-auto-size-input nit-set-focus=setSearchFocus ng-keydown=keydown($event) placeholder={{placeholder}} ng-focus=\"focus = true\" ng-blur=\"focus = false\" typeahead-on-select=\"searchQueryTypeaheadOnSelect($item, $model, $label)\" typeahead=\"parameter as parameter.name for parameter in parameters | filter:isUnsedParameter | filter:{name:$viewValue} | limitTo:parametersDisplayLimit\" ng-change=searchQueryChanged(searchQuery) ng-model=\"searchQuery\"></div><div class=search-parameter-suggestions ng-show=\"parameters && focus\"><span class=title>{{parametersLabel}}:</span> <span class=search-parameter ng-repeat=\"param in parameters | filter:isUnsedParameter | limitTo:parametersDisplayLimit\" ng-mousedown=addSearchParam(param)>{{param.name}}</span></div></div>"
   );
 
 }]);

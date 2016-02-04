@@ -18,9 +18,9 @@ angular.module('angular-advanced-searchbox', [])
                 model: '=ngModel',
                 parameters: '=',
                 parametersLabel: '@',
-                parametersDisplayLimit: '=',
+                parametersDisplayLimit: '=?',
                 placeholder: '@',
-                searchThrottleTime: '='
+                searchThrottleTime: '=?'
             },
             replace: true,
             templateUrl: function(element, attr) {
@@ -105,10 +105,15 @@ angular.module('angular-advanced-searchbox', [])
                             $scope.removeSearchParam(index);
                     };
 
-                    $scope.typeaheadOnSelect = function (item, model, label) {
+                    $scope.searchQueryTypeaheadOnSelect = function (item, model, label) {
                         $scope.addSearchParam(item);
                         $scope.searchQuery = '';
                         updateModel('delete', 'query');
+                    };
+
+                    $scope.searchParamTypeaheadOnSelect = function (suggestedValue, searchParam) {
+                        searchParam.value = suggestedValue;
+                        $scope.searchParamValueChanged(searchParam);
                     };
 
                     $scope.isUnsedParameter = function (value, index) {
@@ -128,6 +133,8 @@ angular.module('angular-advanced-searchbox', [])
                                     key: searchParam.key,
                                     name: searchParam.name,
                                     placeholder: searchParam.placeholder,
+                                    suggestedValues: searchParam.suggestedValues || [],
+                                    restrictToSuggestedValues: searchParam.restrictToSuggestedValues || false,
                                     value: value || ''
                                 }
                             ) - 1;
