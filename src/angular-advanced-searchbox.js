@@ -94,7 +94,7 @@ angular.module('angular-advanced-searchbox', [])
                      * Fix to prevent ignoring of the Click-Selection of a typeahead Element
                      **/
                     $scope.maybeLeaveEditMode = function (e, index) {
-                        if(e.relatedTarget!=null && e.relatedTarget.parentElement.id.indexOf("typeahead")!=-1){
+                        if(e.relatedTarget !== null && e.relatedTarget.parentElement.id.indexOf("typeahead")!=-1){
                             return false;
                         }else{
                             return  $scope.leaveEditMode(e,index);
