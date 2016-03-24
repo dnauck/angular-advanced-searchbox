@@ -277,7 +277,7 @@ angular.module('angular-advanced-searchbox', [])
                     }
 
                     function getCurrentCaretPosition(input) {
-                        if (!input)
+                        if (!input || input.type !== 'text')
                             return 0;
 
                         // Firefox & co
