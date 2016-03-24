@@ -328,7 +328,8 @@ angular.module('angular-advanced-searchbox', [])
                     model: '=ngModel'
                 },
                 link: function($scope, $element, $attrs) {
-                    if($parse($attrs.type !== 'text'))
+                    var supportedInputTypes = ['text', 'search', 'tel', 'url', 'email', 'password', 'number'];
+                    if(supportedInputTypes.indexOf($element[0].type || 'text') === -1)
                         return;
 
                     var container = angular.element('<div style="position: fixed; top: -9999px; left: 0px;"></div>');
