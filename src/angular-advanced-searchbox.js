@@ -320,13 +320,17 @@ angular.module('angular-advanced-searchbox', [])
         }
     ])
     .directive('nitAutoSizeInput', [
-        function() {
+        '$parse',
+        function($parse) {
             return {
                 restrict: 'A',
                 scope: {
                     model: '=ngModel'
                 },
                 link: function($scope, $element, $attrs) {
+                    if($parse($attrs.type !== 'text'))
+                        return;
+
                     var container = angular.element('<div style="position: fixed; top: -9999px; left: 0px;"></div>');
                     var shadow = angular.element('<span style="white-space:pre;"></span>');
 
