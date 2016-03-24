@@ -277,19 +277,23 @@ angular.module('angular-advanced-searchbox', [])
                     }
 
                     function getCurrentCaretPosition(input) {
-                        if (!input || input.type !== 'text')
+                        if (!input)
                             return 0;
 
-                        // Firefox & co
-                        if (typeof input.selectionStart === 'number') {
-                            return input.selectionDirection === 'backward' ? input.selectionStart : input.selectionEnd;
+                        try {
+                            // Firefox & co
+                            if (typeof input.selectionStart === 'number') {
+                                return input.selectionDirection === 'backward' ? input.selectionStart : input.selectionEnd;
 
-                        } else if (document.selection) { // IE
-                            input.focus();
-                            var selection = document.selection.createRange();
-                            var selectionLength = document.selection.createRange().text.length;
-                            selection.moveStart('character', -input.value.length);
-                            return selection.text.length - selectionLength;
+                            } else if (document.selection) { // IE
+                                input.focus();
+                                var selection = document.selection.createRange();
+                                var selectionLength = document.selection.createRange().text.length;
+                                selection.moveStart('character', -input.value.length);
+                                return selection.text.length - selectionLength;
+                            }
+                        } catch(err) { 
+                            // selectionStart is not supported by HTML 5 input type, so jut ignore it
                         }
 
                         return 0;
