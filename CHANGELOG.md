@@ -1,3 +1,6 @@
+### 2.2.0-dev - unreleased
+* add support for events on adding and removing search params, fixed #32
+
 ### 2.1.0 - 04 February 2016
 * add support for suggested values for a search parameter with typeahead support, fixed #11
 * fix optional parameters on AngularJS 1.4.9, fixed #31 and #34

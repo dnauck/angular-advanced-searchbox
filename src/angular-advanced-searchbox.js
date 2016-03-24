@@ -140,10 +140,12 @@ angular.module('angular-advanced-searchbox', [])
                                 }
                             ) - 1;
 
+                        updateModel('add', searchParam.key, value);
+
                         if (enterEditModel === true)
                             $timeout(function() { $scope.enterEditMode(undefined, newIndex); }, 100);
 
-                        updateModel('add', searchParam.key, value);
+                        $scope.$emit('advanced-searchbox:addedSearchParam', searchParam);
                     };
 
                     $scope.removeSearchParam = function (index) {
@@ -154,6 +156,8 @@ angular.module('angular-advanced-searchbox', [])
                         $scope.searchParams.splice(index, 1);
 
                         updateModel('delete', searchParam.key);
+
+                        $scope.$emit('advanced-searchbox:removedSearchParam', searchParam);
                     };
 
                     $scope.removeAll = function() {
@@ -161,6 +165,8 @@ angular.module('angular-advanced-searchbox', [])
                         $scope.searchQuery = '';
                         
                         $scope.model = {};
+
+                        $scope.$emit('advanced-searchbox:removedAllSearchParam');
                     };
 
                     $scope.editPrevious = function(currentIndex) {

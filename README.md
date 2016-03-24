@@ -109,11 +109,22 @@ param can be a scope variable as well as a hard-coded string.
 
 ### Events
 
-The directive emits events as search parameters enters the edit mode (`advanced-searchbox:enteredEditMode`)
-or leaves the edit mode (`advanced-searchbox:leavedEditMode`) or the search model was updated (`advanced-searchbox:modelUpdated`).
+The directive emits events as search parameters added (`advanced-searchbox:addedSearchParam`), removed (`advanced-searchbox:removedSearchParam` and `advanced-searchbox:removedAllSearchParam`), enters the edit mode (`advanced-searchbox:enteredEditMode`), leaves the edit mode (`advanced-searchbox:leavedEditMode`) or the search model was updated (`advanced-searchbox:modelUpdated`).
 To catch these events do the following:
 
 ```js
+$scope.$on('advanced-searchbox:addedSearchParam', function (event, searchParameter) {
+  ///
+});
+
+$scope.$on('advanced-searchbox:removedSearchParam', function (event, searchParameter) {
+  ///
+});
+
+$scope.$on('advanced-searchbox:removedAllSearchParam', function (event) {
+  ///
+});
+
 $scope.$on('advanced-searchbox:enteredEditMode', function (event, searchParameter) {
   ///
 });
