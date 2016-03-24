@@ -132,6 +132,7 @@ angular.module('angular-advanced-searchbox', [])
                                 {
                                     key: searchParam.key,
                                     name: searchParam.name,
+                                    type: searchParam.type || 'text',
                                     placeholder: searchParam.placeholder,
                                     suggestedValues: searchParam.suggestedValues || [],
                                     restrictToSuggestedValues: searchParam.restrictToSuggestedValues || false,
