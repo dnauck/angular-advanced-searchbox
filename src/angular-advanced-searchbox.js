@@ -316,9 +316,10 @@ angular.module('angular-advanced-searchbox', [])
                             });
                         }
                     });
-                    $element.bind('blur', function() {
+                    /*$element.bind('blur', function() {
+                        console.log('nitSetFocus - blur: ' + $element[0].name);
                         $scope.$apply(model.assign($scope, false));
-                    });
+                    });*/
                 }
             };
         }
