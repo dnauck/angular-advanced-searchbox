@@ -325,8 +325,8 @@ angular.module('angular-advanced-searchbox', [])
         }
     ])
     .directive('nitAutoSizeInput', [
-        '$parse',
-        function($parse) {
+        '$timeout',
+        function($timeout) {
             return {
                 restrict: 'A',
                 scope: {
@@ -334,8 +334,7 @@ angular.module('angular-advanced-searchbox', [])
                 },
                 link: function($scope, $element, $attrs) {
                     var supportedInputTypes = ['text', 'search', 'tel', 'url', 'email', 'password', 'number'];
-                    if(supportedInputTypes.indexOf($element[0].type || 'text') === -1)
-                        return;
+                    
 
                     var container = angular.element('<div style="position: fixed; top: -9999px; left: 0px;"></div>');
                     var shadow = angular.element('<span style="white-space:pre;"></span>');
@@ -355,8 +354,13 @@ angular.module('angular-advanced-searchbox', [])
                     angular.element('body').append(container.append(shadow));
 
                     function resize() {
-                        shadow.text($element.val() || $element.attr('placeholder'));
-                        $element.css('width', shadow.outerWidth() + 10);
+                        $timeout(function() {
+                            if(supportedInputTypes.indexOf($element[0].type || 'text') === -1)
+                                return;
+
+                            shadow.text($element.val() || $element.attr('placeholder'));
+                            $element.css('width', shadow.outerWidth() + 10);
+                        });
                     }
 
                     resize();
