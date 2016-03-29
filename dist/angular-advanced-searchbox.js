@@ -132,6 +132,7 @@ angular.module('angular-advanced-searchbox', [])
                                 {
                                     key: searchParam.key,
                                     name: searchParam.name,
+                                    type: searchParam.type || 'text',
                                     placeholder: searchParam.placeholder,
                                     suggestedValues: searchParam.suggestedValues || [],
                                     restrictToSuggestedValues: searchParam.restrictToSuggestedValues || false,
@@ -139,10 +140,12 @@ angular.module('angular-advanced-searchbox', [])
                                 }
                             ) - 1;
 
+                        updateModel('add', searchParam.key, value);
+
                         if (enterEditModel === true)
                             $timeout(function() { $scope.enterEditMode(undefined, newIndex); }, 100);
 
-                        updateModel('add', searchParam.key, value);
+                        $scope.$emit('advanced-searchbox:addedSearchParam', searchParam);
                     };
 
                     $scope.removeSearchParam = function (index) {
@@ -153,6 +156,8 @@ angular.module('angular-advanced-searchbox', [])
                         $scope.searchParams.splice(index, 1);
 
                         updateModel('delete', searchParam.key);
+
+                        $scope.$emit('advanced-searchbox:removedSearchParam', searchParam);
                     };
 
                     $scope.removeAll = function() {
@@ -160,6 +165,8 @@ angular.module('angular-advanced-searchbox', [])
                         $scope.searchQuery = '';
                         
                         $scope.model = {};
+
+                        $scope.$emit('advanced-searchbox:removedAllSearchParam');
                     };
 
                     $scope.editPrevious = function(currentIndex) {
@@ -273,16 +280,20 @@ angular.module('angular-advanced-searchbox', [])
                         if (!input)
                             return 0;
 
-                        // Firefox & co
-                        if (typeof input.selectionStart === 'number') {
-                            return input.selectionDirection === 'backward' ? input.selectionStart : input.selectionEnd;
+                        try {
+                            // Firefox & co
+                            if (typeof input.selectionStart === 'number') {
+                                return input.selectionDirection === 'backward' ? input.selectionStart : input.selectionEnd;
 
-                        } else if (document.selection) { // IE
-                            input.focus();
-                            var selection = document.selection.createRange();
-                            var selectionLength = document.selection.createRange().text.length;
-                            selection.moveStart('character', -input.value.length);
-                            return selection.text.length - selectionLength;
+                            } else if (document.selection) { // IE
+                                input.focus();
+                                var selection = document.selection.createRange();
+                                var selectionLength = document.selection.createRange().text.length;
+                                selection.moveStart('character', -input.value.length);
+                                return selection.text.length - selectionLength;
+                            }
+                        } catch(err) { 
+                            // selectionStart is not supported by HTML 5 input type, so jut ignore it
                         }
 
                         return 0;
@@ -305,21 +316,25 @@ angular.module('angular-advanced-searchbox', [])
                             });
                         }
                     });
-                    $element.bind('blur', function() {
+                    /*$element.bind('blur', function() {
                         $scope.$apply(model.assign($scope, false));
-                    });
+                    });*/
                 }
             };
         }
     ])
     .directive('nitAutoSizeInput', [
-        function() {
+        '$timeout',
+        function($timeout) {
             return {
                 restrict: 'A',
                 scope: {
                     model: '=ngModel'
                 },
                 link: function($scope, $element, $attrs) {
+                    var supportedInputTypes = ['text', 'search', 'tel', 'url', 'email', 'password', 'number'];
+                    
+
                     var container = angular.element('<div style="position: fixed; top: -9999px; left: 0px;"></div>');
                     var shadow = angular.element('<span style="white-space:pre;"></span>');
 
@@ -338,8 +353,13 @@ angular.module('angular-advanced-searchbox', [])
                     angular.element('body').append(container.append(shadow));
 
                     function resize() {
-                        shadow.text($element.val() || $element.attr('placeholder'));
-                        $element.css('width', shadow.outerWidth() + 10);
+                        $timeout(function() {
+                            if(supportedInputTypes.indexOf($element[0].type || 'text') === -1)
+                                return;
+
+                            shadow.text($element.val() || $element.attr('placeholder'));
+                            $element.css('width', shadow.outerWidth() + 10);
+                        });
                     }
 
                     resize();
