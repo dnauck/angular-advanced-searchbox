@@ -1,5 +1,6 @@
-### 2.2.0-dev - unreleased
+### 2.2.0 - 30 March 2016
 * add support for events on adding and removing search params, fixed #32
+* search parameter input does not close anymore when you click on it, fixed #38
 
 ### 2.1.0 - 04 February 2016
 * add support for suggested values for a search parameter with typeahead support, fixed #11
