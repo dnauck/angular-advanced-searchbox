@@ -44,6 +44,6 @@
     </div>
     <div class="search-parameter-suggestions" ng-show="parameters && focus">
         <span class="title">{{parametersLabel}}:</span>
-        <span class="search-parameter" ng-repeat="param in parameters | filter:isUnsedParameter | limitTo:parametersDisplayLimit" data-key="{{searchParam.key}}" ng-mousedown="addSearchParam(param)">{{param.name}}</span>
+        <span class="search-parameter" ng-repeat="param in parameters | filter:isUnsedParameter | limitTo:parametersDisplayLimit" data-key="{{searchParam.key}}" ng-mousedown="addSearchParam(param)">{{searchParam.key}}</span>
     </div>
 </div>
