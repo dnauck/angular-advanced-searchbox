@@ -8,7 +8,7 @@
             <a ng-href="" ng-click="removeSearchParam($index)" role="button">
                 <span class="remove glyphicon glyphicon-trash"></span>
             </a>
-            <div class="key" ng-click="enterEditMode($event, $index)">{{searchParam.name}}:</div>
+            <div class="key" data-key="{{searchParam.key}}" ng-click="enterEditMode($event, $index)">{{searchParam.name}}:</div>
             <div class="value">
                 <span ng-show="!searchParam.editMode" ng-click="enterEditMode($event, $index)">{{searchParam.value}}</span>
                 <input name="value"
@@ -45,6 +45,10 @@
     </div>
     <div class="search-parameter-suggestions" ng-show="parameters && focus">
         <span class="title">{{parametersLabel}}:</span>
-        <span class="search-parameter" ng-repeat="param in parameters | filter:isUnsedParameter | limitTo:parametersDisplayLimit" ng-mousedown="addSearchParam(param)">{{param.name}}</span>
+        <span class="search-parameter" ng-repeat="param in parameters | filter:isUnsedParameter | limitTo:parametersDisplayLimit" 
+          data-key="{{param.key}}"
+          ng-mousedown="addSearchParam(param)">
+          {{param.name}}
+        </span>
     </div>
 </div>
