@@ -20,8 +20,8 @@
                        ng-show="searchParam.editMode"
                        ng-change="searchParam.restrictToSuggestedValues !== true ? searchParamValueChanged(searchParam) : null"
                        ng-model="searchParam.value"
+                       uib-typeahead="suggestedValue for suggestedValue in searchParam.suggestedValues | filter:$viewValue"
                        typeahead-on-select="searchParamTypeaheadOnSelect($item, searchParam)"
-                       typeahead="suggestedValue for suggestedValue in searchParam.suggestedValues | filter:$viewValue"
                        typeahead-editable="searchParam.restrictToSuggestedValues !== true"
                        typeahead-select-on-exact="true"
                        typeahead-select-on-blur="searchParam.restrictToSuggestedValues !== true ? false : true"
@@ -37,8 +37,8 @@
                placeholder="{{placeholder}}"
                ng-focus="focus = true"
                ng-blur="focus = false"
+               uib-typeahead="parameter as parameter.name for parameter in parameters | filter:isUnsedParameter | filter:{name:$viewValue} | limitTo:parametersDisplayLimit"
                typeahead-on-select="searchQueryTypeaheadOnSelect($item, $model, $label)"
-               typeahead="parameter as parameter.name for parameter in parameters | filter:isUnsedParameter | filter:{name:$viewValue} | limitTo:parametersDisplayLimit"
                ng-change="searchQueryChanged(searchQuery)"
                ng-model="searchQuery" />
     </div>
