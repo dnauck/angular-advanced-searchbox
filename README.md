@@ -32,6 +32,9 @@ Load the javascript and css and declare your Angular dependency
 <script src="bower_components/angular-animate/angular-animate.min.js"></script>
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 
+<!-- optional for auto complete / suggested value feature -->
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
 <!-- angular advanced searchbox includes -->
 <link rel="stylesheet" href="bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox.min.css">
 <script src="bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox-tpls.min.js"></script>
