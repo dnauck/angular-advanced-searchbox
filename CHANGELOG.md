@@ -1,5 +1,6 @@
 ### 3.0.0 - 03 May 2016
 * update to angular-ui-bootstrap 1.x, fixed #26, #36
+* show auto complete dropdown from the beginning on suggested value parameters, fixed #33
 
 ### 2.2.0 - 30 March 2016
 * add support for events on adding and removing search params, fixed #32

@@ -21,6 +21,7 @@
                        ng-change="searchParam.restrictToSuggestedValues !== true ? searchParamValueChanged(searchParam) : null"
                        ng-model="searchParam.value"
                        uib-typeahead="suggestedValue for suggestedValue in searchParam.suggestedValues | filter:$viewValue"
+                       typeahead-min-length="0"
                        typeahead-on-select="searchParamTypeaheadOnSelect($item, searchParam)"
                        typeahead-editable="searchParam.restrictToSuggestedValues !== true"
                        typeahead-select-on-exact="true"
