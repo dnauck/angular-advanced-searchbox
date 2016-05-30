@@ -1,4 +1,4 @@
-/*! 
+/*!
  * angular-advanced-searchbox
  * https://github.com/dnauck/angular-advanced-searchbox
  * Copyright (c) 2016 Nauck IT KG http://www.nauck-it.de/
@@ -62,12 +62,13 @@ angular.module('angular-advanced-searchbox', [])
                         });
 
                         // delete not existing search parameters from internal state array
-                        angular.forEach($scope.searchParams, function (value, key){
+                        for (var i = $scope.searchParams.length - 1; i >= 0; i--) {
+                            var value = $scope.searchParams[i];
                             if (!$scope.model.hasOwnProperty(value.key)){
                                 var index = $scope.searchParams.map(function(e) { return e.key; }).indexOf(value.key);
                                 $scope.removeSearchParam(index);
                             }
-                        });
+                        }
                     }, true);
 
                     $scope.searchParamValueChanged = function (param) {
@@ -127,7 +128,7 @@ angular.module('angular-advanced-searchbox', [])
                         if (!$scope.isUnsedParameter(searchParam))
                             return;
 
-                        var newIndex = 
+                        var newIndex =
                             $scope.searchParams.push(
                                 {
                                     key: searchParam.key,
@@ -163,7 +164,7 @@ angular.module('angular-advanced-searchbox', [])
                     $scope.removeAll = function() {
                         $scope.searchParams.length = 0;
                         $scope.searchQuery = '';
-                        
+
                         $scope.model = {};
 
                         $scope.$emit('advanced-searchbox:removedAllSearchParam');
@@ -292,7 +293,7 @@ angular.module('angular-advanced-searchbox', [])
                                 selection.moveStart('character', -input.value.length);
                                 return selection.text.length - selectionLength;
                             }
-                        } catch(err) { 
+                        } catch(err) {
                             // selectionStart is not supported by HTML 5 input type, so jut ignore it
                         }
 
@@ -333,7 +334,7 @@ angular.module('angular-advanced-searchbox', [])
                 },
                 link: function($scope, $element, $attrs) {
                     var supportedInputTypes = ['text', 'search', 'tel', 'url', 'email', 'password', 'number'];
-                    
+
 
                     var container = angular.element('<div style="position: fixed; top: -9999px; left: 0px;"></div>');
                     var shadow = angular.element('<span style="white-space:pre;"></span>');
