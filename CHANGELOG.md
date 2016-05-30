@@ -1,3 +1,6 @@
+### 3.0.1-dev - unreleased
+* remove all search params when triggered from the outside, fixed by #50 (Thanks to Ken Petti)
+
 ### 3.0.0 - 03 May 2016
 * update to angular-ui-bootstrap 1.x, fixed #26, #36
 * show auto complete dropdown from the beginning on suggested value parameters, fixed #33
