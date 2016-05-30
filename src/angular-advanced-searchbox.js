@@ -1,7 +1,7 @@
 /*! 
  * angular-advanced-searchbox
  * https://github.com/dnauck/angular-advanced-searchbox
- * Copyright (c) 2015 Nauck IT KG http://www.nauck-it.de/
+ * Copyright (c) 2016 Nauck IT KG http://www.nauck-it.de/
  * Author: Daniel Nauck <d.nauck(at)nauck-it.de>
  * License: MIT
  */
