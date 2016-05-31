@@ -217,11 +217,13 @@ angular.module('angular-advanced-searchbox', [])
                         if (currentIndex !== undefined)
                             $scope.leaveEditMode(undefined, currentIndex);
 
-                        //TODO: check if index == 0 -> what then?
                         if (currentIndex > 0) {
                             $scope.enterEditMode(undefined, currentIndex - 1);
                         } else if ($scope.searchParams.length > 0) {
                             $scope.enterEditMode(undefined, $scope.searchParams.length - 1);
+                        } else if ($scope.searchParams.length === 0) {
+                            // no search parameter available anymore
+                            $scope.setSearchFocus = true;
                         }
                     };
 

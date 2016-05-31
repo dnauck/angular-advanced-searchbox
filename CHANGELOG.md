@@ -1,6 +1,7 @@
 ### 3.0.1-dev - unreleased
 * remove all search params when triggered from the outside, fixed by #50 (Thanks to Ken Petti)
 * allow multiple search parameters of the same key; output array of values, fixed #6
+* fixed extra backspaces cause the browser to navigate back to previous page, fixed #52
 
 ### 3.0.0 - 03 May 2016
 * update to angular-ui-bootstrap 1.x, fixed #26, #36
