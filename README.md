@@ -51,7 +51,7 @@ $scope.availableSearchParams = [
           { key: "name", name: "Name", placeholder: "Name..." },
           { key: "city", name: "City", placeholder: "City..." },
           { key: "country", name: "Country", placeholder: "Country..." },
-          { key: "emailAddress", name: "E-Mail", placeholder: "E-Mail..." },
+          { key: "emailAddress", name: "E-Mail", placeholder: "E-Mail...", allowMultiple: true },
           { key: "job", name: "Job", placeholder: "Job..." }
         ];
 ```
@@ -155,28 +155,39 @@ $scope.$on('advanced-searchbox:modelUpdated', function (event, model) {
     <tr>
       <th>Name</th>
       <th>Description</th>
+      <th>Type</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>key</td>
       <td>Unique key of the search parameter that is used for the ng-model value.</td>
+      <td>string</td>
     </tr>
     <tr>
       <td>name</td>
       <td>User friendly display name of the search parameter.</td>
+      <td>string</td>
     </tr>
     <tr>
       <td>placeholder</td>
       <td>Specifies a short hint in the parameter search box</td>
+      <td>string</td>
+    </tr>
+    <tr>
+      <td>allowMultiple</td>
+      <td>Should multiple search parameters of the same key allowed? Output type changes to array of values. Default is false.</td>
+      <td>boolean</td>
     </tr>
     <tr>
       <td>suggestedValues</td>
       <td>An array of suggested search values, e.g. ['Berlin', 'London', 'Paris']</td>
+      <td>string[]</td>
     </tr>
     <tr>
       <td>restrictToSuggestedValues</td>
-      <td>Should it restrict possible search values to the ones from the suggestedValues array?</td>
+      <td>Should it restrict possible search values to the ones from the suggestedValues array? Default is false.</td>
+      <td>boolean</td>
     </tr>
   </tbody>
 </table>
@@ -187,5 +198,6 @@ Full example:
 $scope.availableSearchParams = [
           { key: "name", name: "Name", placeholder: "Name..." },
           { key: "city", name: "City", placeholder: "City...", restrictToSuggestedValues: true, suggestedValues: ['Berlin', 'London', 'Paris'] }
+          { key: "email", name: "E-Mail", placeholder: "E-Mail...", allowMultiple: true },
         ];
 ```
