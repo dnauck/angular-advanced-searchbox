@@ -1,4 +1,4 @@
-<div class="advancedSearchBox" ng-class="{active:focus}" ng-init="focus = false" ng-click="!focus ? setSearchFocus = true : null">
+<div class="advancedSearchBox" ng-class="{active:focus}" ng-init="focus = false" ng-click="!focus ? setFocusFor('searchbox') : null">
     <span ng-show="searchParams.length < 1 && searchQuery.length === 0" class="search-icon glyphicon glyphicon-search"></span>
     <a ng-href="" ng-show="searchParams.length > 0 || searchQuery.length > 0" ng-click="removeAll()" role="button">
         <span class="remove-all-icon glyphicon glyphicon-trash"></span>
@@ -14,7 +14,7 @@
                 <input name="value"
                        type="{{searchParam.type}}"
                        nit-auto-size-input
-                       nit-set-focus="searchParam.editMode"
+                       set-focus-on="{{'searchParam:' + searchParam.key}}"
                        ng-keydown="keydown($event, $index)"
                        ng-blur="leaveEditMode($event, $index)"
                        ng-show="searchParam.editMode"
@@ -33,7 +33,7 @@
                class="search-parameter-input"
                type="text"
                nit-auto-size-input
-               nit-set-focus="setSearchFocus"
+               set-focus-on="searchbox"
                ng-keydown="keydown($event)"
                placeholder="{{placeholder}}"
                ng-focus="focus = true"
