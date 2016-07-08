@@ -150,6 +150,21 @@ angular.module('angular-advanced-searchbox', [])
                         return $filter('filter')($scope.searchParams, function (param) { return param.key === value.key && !param.allowMultiple; }).length === 0;
                     };
 
+                    $scope.canAddParameter = function () {
+                      var availableParameters = $scope.parameters.length;
+                        for (var i = 0; i < $scope.parameters.length; i++) {
+                            if (!$scope.parameters[i].allowMultiple) {
+                                for ( var j = 0; j < $scope.searchParams.length; j++) {
+                                  if ($scope.parameters[i].key === $scope.searchParams[j].key) {
+                                    availableParameters -= 1;
+                                    break;
+                                  }
+                                }
+                            }
+                        }
+                        return availableParameters > 0;
+                    };
+
                     $scope.addSearchParam = function (searchParam, value, enterEditModel) {
                         if (enterEditModel === undefined)
                             enterEditModel = true;
