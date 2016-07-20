@@ -165,6 +165,8 @@ angular.module('angular-advanced-searchbox', [])
                             $scope.searchParams.push(
                                 {
                                     key: searchParam.key,
+                                    viewKey:  searchParam.viewKey,
+                                    viewValue:  searchParam.viewValue,
                                     name: searchParam.name,
                                     type: searchParam.type || 'text',
                                     placeholder: searchParam.placeholder,
@@ -312,7 +314,13 @@ angular.module('angular-advanced-searchbox', [])
                         searchThrottleTimer = $timeout(function () {
                             angular.forEach(changeBuffer, function (change) {
                                 var searchParam = $filter('filter')($scope.parameters, function (param) { return param.key === key; })[0];
-                                if(searchParam && searchParam.allowMultiple){
+
+                                if (searchParam && angular.isObject(change.value)) {
+                                    var viewKey = searchParam["viewKey"];
+                                    change.value.viewKey = viewKey;
+                                }
+
+                                if(searchParam && searchParam.allowMultiple) {
                                     if(!angular.isArray($scope.model[change.key]))
                                         $scope.model[change.key] = [];
 
