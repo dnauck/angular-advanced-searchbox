@@ -316,7 +316,7 @@ angular.module('angular-advanced-searchbox', [])
                                 var searchParam = $filter('filter')($scope.parameters, function (param) { return param.key === key; })[0];
 
                                 if (searchParam && angular.isObject(change.value)) {
-                                    var viewKey = searchParam["viewKey"];
+                                    var viewKey = searchParam.viewKey;
                                     change.value.viewKey = viewKey;
                                 }
 
