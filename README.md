@@ -7,13 +7,16 @@ A directive for AngularJS providing a advanced visual search box.
 
 ### Usage
 
-Include with bower
 
-```sh
-bower install angular-advanced-searchbox
-```
 
-The bower package contains files in the ```dist/```directory with the following names:
+Include with Node
+
+Download package(until merged into master) and run
+'''sh
+npm install
+'''
+
+The package contains files in the ```dist/```directory with the following names:
 
 - angular-advanced-searchbox.js
 - angular-advanced-searchbox.min.js
