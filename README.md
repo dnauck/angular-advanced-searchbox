@@ -9,12 +9,12 @@ A directive for AngularJS providing a advanced visual search box.
 
 
 
-Include with Node
+Include with node
 
-Download package(until merged into master) and run
-'''sh
+Download package(until merged into master)
+```sh
 npm install
-'''
+```
 
 The package contains files in the ```dist/```directory with the following names:
 
