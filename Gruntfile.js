@@ -13,7 +13,8 @@ module.exports = function(grunt) {
         './src/*.js', '*.js', '*.json'
       ],
       options: {
-        jshintrc: '.jshintrc'
+        jshintrc: '.jshintrc',
+        reporterOutput: ''
       }
     },
     ngtemplates: {
@@ -48,7 +49,7 @@ module.exports = function(grunt) {
       main : {
         files: [
           {
-            src: ['src/<%= pkg.name %>.js'], 
+            src: ['src/<%= pkg.name %>.js'],
             dest: 'dist/<%= pkg.name %>.js'
           }
         ]
@@ -56,7 +57,7 @@ module.exports = function(grunt) {
       template : {
         files: [
           {
-            src: ['src/<%= pkg.name %>.html'], 
+            src: ['src/<%= pkg.name %>.html'],
             dest: 'dist/<%= pkg.name %>.html'
           }
         ]

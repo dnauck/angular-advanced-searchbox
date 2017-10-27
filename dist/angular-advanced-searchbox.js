@@ -20,7 +20,8 @@ angular.module('angular-advanced-searchbox', [])
                 parametersLabel: '@',
                 parametersDisplayLimit: '=?',
                 placeholder: '@',
-                searchThrottleTime: '=?'
+                searchThrottleTime: '=?',
+                focusName: '@?'
             },
             replace: true,
             templateUrl: function(element, attr) {
@@ -36,6 +37,7 @@ angular.module('angular-advanced-searchbox', [])
                     $scope.searchThrottleTime = $scope.searchThrottleTime || 1000;
                     $scope.searchParams = [];
                     $scope.searchQuery = '';
+                    $scope.focusName = $scope.focusName || 'searchbox';
                     $scope.setFocusFor = setFocusFor;
                     var searchThrottleTimer;
                     var changeBuffer = [];
