@@ -114,6 +114,10 @@ param can be a scope variable as well as a hard-coded string.
       <td>searchThrottleTime</td>
       <td>Specifies the time in milliseconds to wait for changes in the ui until the ng-model is updated. Default is 1000ms.</td>
     </tr>
+    <tr>
+      <td>focusName</td>
+      <td>Specifies search box focus name. Default is 'searchbox'.</td>
+    </tr>
   </tbody>
 </table>
 
