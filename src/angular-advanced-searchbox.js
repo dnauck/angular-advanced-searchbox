@@ -228,11 +228,13 @@ angular.module('angular-advanced-searchbox', [])
                         }
                     };
 
-                    $scope.editNext = function(currentIndex) {
+                    $scope.editNext = function(currentIndex, key) {
                         if (currentIndex === undefined)
                             return;
 
-                        $scope.leaveEditMode(undefined, currentIndex);
+                        if (key !== 13) {
+	                        $scope.leaveEditMode(undefined, currentIndex);
+                        }
 
                         //TODO: check if index == array length - 1 -> what then?
                         if (currentIndex < $scope.searchParams.length - 1) {
@@ -261,11 +263,11 @@ angular.module('angular-advanced-searchbox', [])
                                 $scope.editPrevious(searchParamIndex);
                             } else {
                                 e.preventDefault();
-                                $scope.editNext(searchParamIndex);
+                                $scope.editNext(searchParamIndex, e.which);
                             }
 
                         } else if (e.which == 13) { // enter
-                            $scope.editNext(searchParamIndex);
+                            $scope.editNext(searchParamIndex, e.which);
 
                         } else if (e.which == 37) { // left
                             if (cursorPosition === 0)
@@ -273,7 +275,7 @@ angular.module('angular-advanced-searchbox', [])
 
                         } else if (e.which == 39) { // right
                             if (cursorPosition === e.target.value.length)
-                                $scope.editNext(searchParamIndex);
+                                $scope.editNext(searchParamIndex, e.which);
                         }
                     };
 
