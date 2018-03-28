@@ -1,9 +1,10 @@
 {
   "name": "angular-advanced-searchbox",
   "version": "3.0.2",
-  "homepage": "https://github.com/dnauck/angular-advanced-searchbox",
+  "homepage": "https://github.com/marchrius/angular-advanced-searchbox",
   "authors": [
-    "Daniel Nauck <d.nauck@nauck-it.de>"
+    "Daniel Nauck <d.nauck@nauck-it.de>",
+    "Matteo Gaggiano <m.gaggiano@marchrius.org>"
   ],
   "description": "A directive for AngularJS providing a advanced visual search box",
   "main": [
@@ -27,9 +28,9 @@
     "tests"
   ],
   "dependencies": {
-        "angular": "1",
-        "jquery": "2",
-        "bootstrap": "3",
-        "angular-bootstrap": "1"
-    }
+    "angular": "1",
+    "jquery": "2",
+    "bootstrap": "3",
+    "angular-bootstrap": "1"
+  }
 }
