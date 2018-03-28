@@ -37,6 +37,10 @@ angular.module('angular-advanced-searchbox', [])
                     $scope.searchIconClass = $scope.searchIconClass || 'glyphicon glyphicon-search';
                     $scope.plusIconClass = $scope.plusIconClass || 'glyphicon glyphicon-plus';
 
+                    function returnAsIs(arg0) {
+                        return arg0;
+                    }
+
                     $scope.parametersLabel = $scope.parametersLabel || 'Parameter Suggestions';
                     $scope.parametersDisplayLimit = $scope.parametersDisplayLimit || 8;
                     $scope.placeholder = $scope.placeholder || 'Search ...';
@@ -328,10 +332,10 @@ angular.module('angular-advanced-searchbox', [])
                                 var isObject = angular.isObject(change.value);
                                 var isDefined = angular.isDefined(change.value);
                                 var isQueryMode = change.key === 'query' && angular.isUndefined(parameter);
-                                var keyTransFn = !isQueryMode && parameter.keyTransformer && angular.isFunction(parameter.keyTransformer) ? parameter.keyTransformer : (arg) => {return arg;};
-                                var valueTransFn = !isQueryMode && parameter.valueTransformer && angular.isFunction(parameter.valueTransformer) ? parameter.valueTransformer : (arg) => {return arg;};
-                                var viewKeyTransFn = !isQueryMode && parameter.viewKeyTransformer && angular.isFunction(parameter.viewKeyTransformer) ? parameter.viewKeyTransformer : (arg) => {return arg;};
-                                var viewValueTransFn = !isQueryMode && parameter.viewValueTransformer && angular.isFunction(parameter.viewValueTransformer) ? parameter.viewValueTransformer : (arg) => {return arg;};
+                                var keyTransFn = !isQueryMode && parameter.keyTransformer && angular.isFunction(parameter.keyTransformer) ? parameter.keyTransformer : returnAsIs;
+                                var valueTransFn = !isQueryMode && parameter.valueTransformer && angular.isFunction(parameter.valueTransformer) ? parameter.valueTransformer : returnAsIs;
+                                var viewKeyTransFn = !isQueryMode && parameter.viewKeyTransformer && angular.isFunction(parameter.viewKeyTransformer) ? parameter.viewKeyTransformer : returnAsIs;
+                                var viewValueTransFn = !isQueryMode && parameter.viewValueTransformer && angular.isFunction(parameter.viewValueTransformer) ? parameter.viewValueTransformer : returnAsIs;
 
                                 var value = change.value;
                                 
@@ -431,7 +435,7 @@ angular.module('angular-advanced-searchbox', [])
             return function(value, key) {
                 // suggestedValue[searchParam.viewKey] as suggestedValue[searchParam.viewValue] for suggestedValue in searchParam.suggestedValues | filter:$viewValue
                 return angular.isObject(value) ? value[key] : value;
-            }
+            };
         }
     ])
     .directive('setFocusOn', [
