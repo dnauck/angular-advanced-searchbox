@@ -437,5 +437,11 @@ angular.module('angular-advanced-searchbox', [])
                 }
             };
         }
-    ]);
+    ])
+    .filter('toString', function() {
+        return function(input, customToString) {
+            customToString = customToString || String;
+            return customToString(input);
+        };
+    });
 })();
