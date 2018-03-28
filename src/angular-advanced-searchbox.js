@@ -24,7 +24,7 @@ angular.module('angular-advanced-searchbox', [])
             },
             replace: true,
             templateUrl: function(element, attr) {
-                return attr.templateUrl || 'angular-advanced-searchbox.html';
+                return attr.templateurl || 'angular-advanced-searchbox.html';
             },
             controller: [
                 '$scope', '$attrs', '$element', '$timeout', '$filter', 'setFocusFor',
