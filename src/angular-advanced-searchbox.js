@@ -20,6 +20,9 @@ angular.module('angular-advanced-searchbox', [])
                 parametersLabel: '@',
                 parametersDisplayLimit: '=?',
                 placeholder: '@',
+                trashIconClass: '@',
+                searchIconClass: '@',
+                plusIconClass: '@',
                 searchThrottleTime: '=?'
             },
             replace: true,
@@ -29,6 +32,10 @@ angular.module('angular-advanced-searchbox', [])
             controller: [
                 '$scope', '$attrs', '$element', '$timeout', '$filter', 'setFocusFor',
                 function ($scope, $attrs, $element, $timeout, $filter, setFocusFor) {
+
+                    $scope.trashIconClass = $scope.trashIconClass || 'glyphicon glyphicon-trash';
+                    $scope.searchIconClass = $scope.searchIconClass || 'glyphicon glyphicon-search';
+                    $scope.plusIconClass = $scope.plusIconClass || 'glyphicon glyphicon-plus';
 
                     $scope.parametersLabel = $scope.parametersLabel || 'Parameter Suggestions';
                     $scope.parametersDisplayLimit = $scope.parametersDisplayLimit || 8;
@@ -313,14 +320,52 @@ angular.module('angular-advanced-searchbox', [])
 
                         searchThrottleTimer = $timeout(function () {
                             angular.forEach(changeBuffer, function (change) {
-                                var searchParam = $filter('filter')($scope.parameters, function (param) { return param.key === key; })[0];
+                                var searchParam = $filter('filter')($scope.searchParams, function (param) { return param.key === key; })[0];
+                                var parameter = $filter('filter')($scope.parameters, function (param) { return param.key === key; })[0];
+                                var viewKeyKey = 'key', viewKey, viewValueKey = 'value', viewValue;
+                                // as Object is related to model and not to configuration
+                                var asObject = parameter && parameter.asObject === true;
+                                var isObject = angular.isObject(change.value);
+                                var isDefined = angular.isDefined(change.value);
+                                var isQueryMode = change.key === 'query' && angular.isUndefined(parameter);
+                                var keyTransFn = !isQueryMode && parameter.keyTransformer && angular.isFunction(parameter.keyTransformer) ? parameter.keyTransformer : (arg) => {return arg;};
+                                var valueTransFn = !isQueryMode && parameter.valueTransformer && angular.isFunction(parameter.valueTransformer) ? parameter.valueTransformer : (arg) => {return arg;};
+                                var viewKeyTransFn = !isQueryMode && parameter.viewKeyTransformer && angular.isFunction(parameter.viewKeyTransformer) ? parameter.viewKeyTransformer : (arg) => {return arg;};
+                                var viewValueTransFn = !isQueryMode && parameter.viewValueTransformer && angular.isFunction(parameter.viewValueTransformer) ? parameter.viewValueTransformer : (arg) => {return arg;};
 
-                                if (searchParam && angular.isObject(change.value)) {
-                                    var viewKey = searchParam.viewKey;
-                                    change.value.viewKey = viewKey;
+                                var value = change.value;
+                                
+                                // activate only if not query mode
+                                if (!isQueryMode) {
+                                    if (isDefined) {
+                                        if (isObject) {
+                                            viewKeyKey = parameter.viewKey;
+                                            viewValueKey = parameter.viewValue;
+                                            viewValue = value[viewValueKey];
+                                            viewKey = value[viewKeyKey];
+                                            value = asObject ? value : value[viewKeyKey];
+                                        } else {
+                                            value = asObject ? { value: value } : value;
+                                        }
+                                    }
+
+                                    var transformValue = value;
+                                    var transformKey = key;
+                                    var transformViewKey = viewKey;
+                                    var transformViewValue = viewValue;
+
+                                    key = keyTransFn(transformKey);
+                                    value = valueTransFn(transformValue);
+                                    viewKey = viewKeyTransFn(transformViewKey);
+                                    viewValue = viewValueTransFn(transformViewValue);
+
+                                    // restore change model with new properties
+                                    change.value = value;
+                                    change.key = key;
                                 }
+                                
 
-                                if(searchParam && searchParam.allowMultiple) {
+                                if(parameter && parameter.allowMultiple) {
                                     if(!angular.isArray($scope.model[change.key]))
                                         $scope.model[change.key] = [];
 
@@ -336,6 +381,15 @@ angular.module('angular-advanced-searchbox', [])
                                         delete $scope.model[change.key];
                                     else
                                         $scope.model[change.key] = change.value;
+                                }
+
+                                if (searchParam) {
+                                    searchParam.$$view = {
+                                        key: key,
+                                        value: value,
+                                        viewKey: viewKeyKey,
+                                        viewValue: viewValue
+                                    };
                                 }
                             });
 
@@ -372,6 +426,14 @@ angular.module('angular-advanced-searchbox', [])
             ]
         };
     })
+    .filter('flattenObject', [
+        function() {
+            return function(value, key) {
+                // suggestedValue[searchParam.viewKey] as suggestedValue[searchParam.viewValue] for suggestedValue in searchParam.suggestedValues | filter:$viewValue
+                return angular.isObject(value) ? value[key] : value;
+            }
+        }
+    ])
     .directive('setFocusOn', [
         function() {
             return {
