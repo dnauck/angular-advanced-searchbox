@@ -1,16 +1,23 @@
 module.exports = function(grunt) {
 
+  var reducer = (a, c) => a+' * - '+c.name+' <'+c.email+'> ('+c.url+')\n';
+
+  var pkgConf = grunt.file.readJSON('package.json');
   // Project configuration.
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: pkgConf,
     banner: '/*! \n * <%= pkg.title || pkg.name %> v<%= pkg.version %>\n' +
       ' * <%= pkg.homepage %>\n' +
       ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> <%= pkg.author.url %>\n' +
+      ' * Contributors\n' +
+      (pkgConf.contributors.reduce(reducer, '')) +
+      ' * Maintainers\n' +
+      (pkgConf.maintainers.reduce(reducer, '')) +
       ' * License: <%= pkg.license %>\n' +
       ' */\n',
     jshint: {
       all: [
-        './src/*.js', '*.js', '*.json'
+        './src/*.js', '*.js', '*.json', '!Gruntfile.js'
       ],
       options: {
         jshintrc: '.jshintrc'
