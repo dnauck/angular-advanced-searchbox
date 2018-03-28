@@ -86,6 +86,9 @@ module.exports = function(grunt) {
     clean: {
       temp: {
         src: [ 'tmp' ]
+      },
+      dist: {
+        src: [ 'dist' ]
       }
     },
     bump: {
