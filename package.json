@@ -16,6 +16,13 @@
     "name": "Nauck IT KG",
     "url": "http://www.nauck-it.de/"
   },
+  "maintainers": [
+    {
+      "name": "Matteo Gaggiano",
+      "email": "m.gaggiano@marchirus.org",
+      "url": "http://www.marchrius.org/"
+    }
+  ],
   "contributors": [
     {
       "name": "Matteo Gaggiano",
