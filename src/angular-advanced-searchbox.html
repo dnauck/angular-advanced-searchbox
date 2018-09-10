@@ -16,7 +16,7 @@
                        nit-auto-size-input
                        set-focus-on="{{'searchParam:' + searchParam.key}}"
                        ng-keydown="keydown($event, $index)"
-                       ng-blur="leaveEditMode($event, $index)"
+                       ng-blur="maybeLeaveEditMode($event, $index)"
                        ng-show="searchParam.editMode"
                        ng-change="searchParam.restrictToSuggestedValues !== true ? searchParamValueChanged(searchParam) : null"
                        ng-model="searchParam.value"
