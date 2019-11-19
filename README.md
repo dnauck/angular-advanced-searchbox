@@ -1,13 +1,13 @@
 ## Angular Advanced Searchbox
 [![Build Status](https://travis-ci.org/dnauck/angular-advanced-searchbox.png?branch=master)](https://travis-ci.org/dnauck/angular-advanced-searchbox)
 
-A directive for AngularJS providing a advanced visual search box.
+A directive for AngularJS providing an advanced visual search box.
 
 ### [DEMO](http://dnauck.github.io/angular-advanced-searchbox/)
 
 ### Usage
 
-Include with bower
+Include with Bower
 
 ```sh
 bower install angular-advanced-searchbox
@@ -22,7 +22,7 @@ The bower package contains files in the ```dist/```directory with the following 
 
 Files with the ```min``` suffix are minified versions to be used in production. The files with ```-tpls``` in their name have the directive template bundled. If you don't need the default template use the ```angular-paginate-anything.min.js``` file and provide your own template with the ```templateUrl``` attribute.
 
-Load the javascript and css and declare your Angular dependency
+Load the JavaScript and CSS, and declare your Angular dependency
 
 ```html
 <!-- dependency includes -->
@@ -112,7 +112,7 @@ param can be a scope variable as well as a hard-coded string.
     </tr>
     <tr>
       <td>searchThrottleTime</td>
-      <td>Specifies the time in milliseconds to wait for changes in the ui until the ng-model is updated. Default is 1000ms.</td>
+      <td>Specifies the time in milliseconds to wait for changes in the UI until the ng-model is updated. Default is 1000ms.</td>
     </tr>
   </tbody>
 </table>
@@ -161,27 +161,27 @@ $scope.$on('advanced-searchbox:modelUpdated', function (event, model) {
   <tbody>
     <tr>
       <td>key</td>
-      <td>Unique key of the search parameter that is used for the ng-model value.</td>
+      <td>A unique key of the search parameter that is used for the ng-model value.</td>
       <td>string</td>
     </tr>
     <tr>
       <td>name</td>
-      <td>User friendly display name of the search parameter.</td>
+      <td>A user friendly display name of the search parameter.</td>
       <td>string</td>
     </tr>
     <tr>
       <td>placeholder</td>
-      <td>Specifies a short hint in the parameter search box</td>
+      <td>Specifies a short hint in the parameter search box.</td>
       <td>string</td>
     </tr>
     <tr>
       <td>allowMultiple</td>
-      <td>Should multiple search parameters of the same key allowed? Output type changes to array of values. Default is false.</td>
+      <td>Should multiple search parameters of the same key allowed? Output type changes to an array of values. Default is false.</td>
       <td>boolean</td>
     </tr>
     <tr>
       <td>suggestedValues</td>
-      <td>An array of suggested search values, e.g. ['Berlin', 'London', 'Paris']</td>
+      <td>An array of suggested search values, e.g. ['Berlin', 'London', 'Paris'].</td>
       <td>string[]</td>
     </tr>
     <tr>
